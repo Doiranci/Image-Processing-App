@@ -9,7 +9,7 @@ namespace ProjectPictureManipulting
         public Form1()
         {
             InitializeComponent();
-
+            
         }
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -64,7 +64,7 @@ namespace ProjectPictureManipulting
         {
             File.Copy(textBox1.Text, Path.Combine(@"C:\Users\Martin Mitkov\source\repos\ProjectPictureManipulting\ProjectPictureManipulting\SavedImages\"
             , Path.GetFileName(textBox1.Text)), true);
-            label1.Text = "Image saved successfully";
+            label1.Text = "Image saved successfully!!!!";
         }
     }
 }
