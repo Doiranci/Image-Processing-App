@@ -39,6 +39,8 @@
             pictureBox1 = new PictureBox();
             textBox1 = new TextBox();
             label1 = new Label();
+            btnGreyScale = new Button();
+            saveFileDialog1 = new SaveFileDialog();
             Header.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -138,6 +140,7 @@
             pictureBox1.Location = new Point(175, 202);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(295, 148);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
@@ -158,11 +161,22 @@
             label1.Size = new Size(0, 15);
             label1.TabIndex = 7;
             // 
+            // btnGreyScale
+            // 
+            btnGreyScale.Location = new Point(497, 242);
+            btnGreyScale.Name = "btnGreyScale";
+            btnGreyScale.Size = new Size(98, 30);
+            btnGreyScale.TabIndex = 8;
+            btnGreyScale.Text = "Grey scale";
+            btnGreyScale.UseVisualStyleBackColor = true;
+            btnGreyScale.Click += btnGreyScale_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnGreyScale);
             Controls.Add(label1);
             Controls.Add(textBox1);
             Controls.Add(pictureBox1);
@@ -190,5 +204,7 @@
         private PictureBox pictureBox1;
         private TextBox textBox1;
         private Label label1;
+        private Button btnGreyScale;
+        private SaveFileDialog saveFileDialog1;
     }
 }
