@@ -47,7 +47,7 @@ namespace ProjectPictureManipulting
         public Form1()
         {
             InitializeComponent();
-
+            SetStyle(ControlStyles.ResizeRedraw, true);
         }
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -96,7 +96,7 @@ namespace ProjectPictureManipulting
                 pictureBox1.Image = new Bitmap(open.FileName);
                 originaleImage = new(pictureBox1.Image);
             }
-            
+
         }
 
         private void btnSaveImage_Click(object sender, EventArgs e)
@@ -119,7 +119,7 @@ namespace ProjectPictureManipulting
                 pictureBox1.Image.Save(sfd.FileName, format);
             }
             label1.Text = "Image saved successfully!!!!";
-            
+
         }
         bool isGreyscaled;
         Bitmap originaleImage;
@@ -129,7 +129,7 @@ namespace ProjectPictureManipulting
             if (!isGreyscaled)
             {
                 pictureBox1.Image = ConvertToGrayscale(defaultImage);
-                isGreyscaled = true;  
+                isGreyscaled = true;
             }
             else
             {
@@ -139,5 +139,57 @@ namespace ProjectPictureManipulting
 
         }
 
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            panel2.MaximumSize = new (1200, 1600);
+
+        }
+
+        int grip = 16;
+        int caption = 40;
+        protected override void WndProc(ref Message m) // This makes the form drag-resizable
+        {
+            if (m.Msg == 0x84)
+            {
+                Point p = new Point(m.LParam.ToInt32());
+                p = this.PointToClient(p);
+                if (p.Y <= caption && p.Y >= grip)
+                {
+                    m.Result = (IntPtr)2;
+                    return;
+                }
+                if (p.X >= this.ClientSize.Width - grip && p.Y >= this.ClientSize.Height - grip)
+                {
+                    m.Result = (IntPtr)17;
+                    return;
+                }
+                if (p.X <= grip && p.Y >= this.ClientSize.Height - grip)
+                {
+                    m.Result = (IntPtr)16;
+                    return;
+                }
+                if (p.X <= grip)
+                {
+                    m.Result = (IntPtr)10;
+                    return;
+                }
+                if (p.X >= ClientSize.Width - grip)
+                {
+                    m.Result = (IntPtr)11;
+                    return;
+                }
+                if (p.Y <= grip)
+                {
+                    m.Result = (IntPtr)12;
+                    return;
+                }
+                if (p.Y >= this.ClientSize.Height - grip)
+                {
+                    m.Result = (IntPtr)15;
+                    return;
+                }
+            }
+            base.WndProc(ref m);
+        }
     }
 }

@@ -41,9 +41,11 @@
             label1 = new Label();
             btnGreyScale = new Button();
             saveFileDialog1 = new SaveFileDialog();
+            panel2 = new Panel();
             Header.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // Header
@@ -117,7 +119,7 @@
             // 
             // btnUploadImage
             // 
-            btnUploadImage.Location = new Point(488, 147);
+            btnUploadImage.Location = new Point(310, 43);
             btnUploadImage.Name = "btnUploadImage";
             btnUploadImage.Size = new Size(139, 32);
             btnUploadImage.TabIndex = 3;
@@ -127,7 +129,7 @@
             // 
             // btnSaveImage
             // 
-            btnSaveImage.Location = new Point(522, 202);
+            btnSaveImage.Location = new Point(455, 45);
             btnSaveImage.Name = "btnSaveImage";
             btnSaveImage.Size = new Size(63, 29);
             btnSaveImage.TabIndex = 4;
@@ -137,16 +139,17 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(175, 202);
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox1.Location = new Point(13, 12);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(295, 148);
+            pictureBox1.Size = new Size(412, 275);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(175, 156);
+            textBox1.Location = new Point(9, 48);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(295, 23);
             textBox1.TabIndex = 6;
@@ -163,7 +166,7 @@
             // 
             // btnGreyScale
             // 
-            btnGreyScale.Location = new Point(497, 242);
+            btnGreyScale.Location = new Point(524, 43);
             btnGreyScale.Name = "btnGreyScale";
             btnGreyScale.Size = new Size(98, 30);
             btnGreyScale.TabIndex = 8;
@@ -171,24 +174,35 @@
             btnGreyScale.UseVisualStyleBackColor = true;
             btnGreyScale.Click += btnGreyScale_Click;
             // 
+            // panel2
+            // 
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel2.Controls.Add(pictureBox1);
+            panel2.Location = new Point(12, 139);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(437, 299);
+            panel2.TabIndex = 9;
+            panel2.Paint += panel2_Paint;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(800, 450);
+            Controls.Add(panel2);
             Controls.Add(btnGreyScale);
             Controls.Add(label1);
             Controls.Add(textBox1);
-            Controls.Add(pictureBox1);
             Controls.Add(btnSaveImage);
             Controls.Add(btnUploadImage);
             Controls.Add(Header);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "Form1";
             Text = "Form1";
             Header.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -206,5 +220,6 @@
         private Label label1;
         private Button btnGreyScale;
         private SaveFileDialog saveFileDialog1;
+        private Panel panel2;
     }
 }
