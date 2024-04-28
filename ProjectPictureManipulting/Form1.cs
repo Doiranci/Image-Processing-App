@@ -9,6 +9,52 @@ namespace ProjectPictureManipulting
 
     public partial class Form1 : Form
     {
+        int grip = 16;
+        int caption = 40;
+        protected override void WndProc(ref Message m) // This makes the form drag-resizable
+        {
+            if (m.Msg == 0x84)
+            {
+                Point p = new Point(m.LParam.ToInt32());
+                p = this.PointToClient(p);
+                if (p.Y <= caption && p.Y >= grip)
+                {
+                    m.Result = (IntPtr)2;
+                    return;
+                }
+                if (p.X >= this.ClientSize.Width - grip && p.Y >= this.ClientSize.Height - grip)
+                {
+                    m.Result = (IntPtr)17;
+                    return;
+                }
+                if (p.X <= grip && p.Y >= this.ClientSize.Height - grip)
+                {
+                    m.Result = (IntPtr)16;
+                    return;
+                }
+                if (p.X <= grip)
+                {
+                    m.Result = (IntPtr)10;
+                    return;
+                }
+                if (p.X >= ClientSize.Width - grip)
+                {
+                    m.Result = (IntPtr)11;
+                    return;
+                }
+                if (p.Y <= grip)
+                {
+                    m.Result = (IntPtr)12;
+                    return;
+                }
+                if (p.Y >= this.ClientSize.Height - grip)
+                {
+                    m.Result = (IntPtr)15;
+                    return;
+                }
+            }
+            base.WndProc(ref m);
+        }
         public static Bitmap ConvertToGrayscale(Bitmap original)
         {
             //create a blank bitmap the same size as original
@@ -19,21 +65,20 @@ namespace ProjectPictureManipulting
 
             //create the grayscale ColorMatrix
             ColorMatrix colorMatrix = new ColorMatrix(
-               new float[][]
-               {
-         new float[] {.3f, .3f, .3f, 0, 0},
-         new float[] {.59f, .59f, .59f, 0, 0},
-         new float[] {.11f, .11f, .11f, 0, 0},
-         new float[] {0, 0, 0, 1, 0},
-         new float[] {0, 0, 0, 0, 1}
-               });
+               [
+         [.3f, .3f, .3f, 0, 0],
+         [.59f, .59f, .59f, 0, 0],
+         [.11f, .11f, .11f, 0, 0],
+         [0, 0, 0, 1, 0],
+         [0, 0, 0, 0, 1]
+               ]);
 
             //create some image attributes
             ImageAttributes attributes = new ImageAttributes();
 
             //set the color matrix attribute
-            attributes.SetColorMatrix(colorMatrix);
 
+            attributes.SetColorMatrix(colorMatrix);
             //draw the original image on the new image
             //using the grayscale color matrix
             g.DrawImage(original, new Rectangle(0, 0, original.Width, original.Height),
@@ -86,7 +131,7 @@ namespace ProjectPictureManipulting
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
         }
-        private string uploadedImageAdress;
+
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -141,55 +186,68 @@ namespace ProjectPictureManipulting
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
-            panel2.MaximumSize = new (1200, 1600);
+            panel2.MaximumSize = new(1200, 1600);
 
         }
 
-        int grip = 16;
-        int caption = 40;
-        protected override void WndProc(ref Message m) // This makes the form drag-resizable
+        private void btnRotate_Click(object sender, EventArgs e)
         {
-            if (m.Msg == 0x84)
+            // Get the current image from the PictureBox
+            Image currentImage = pictureBox1.Image;
+
+            if (currentImage != null)
             {
-                Point p = new Point(m.LParam.ToInt32());
-                p = this.PointToClient(p);
-                if (p.Y <= caption && p.Y >= grip)
-                {
-                    m.Result = (IntPtr)2;
-                    return;
-                }
-                if (p.X >= this.ClientSize.Width - grip && p.Y >= this.ClientSize.Height - grip)
-                {
-                    m.Result = (IntPtr)17;
-                    return;
-                }
-                if (p.X <= grip && p.Y >= this.ClientSize.Height - grip)
-                {
-                    m.Result = (IntPtr)16;
-                    return;
-                }
-                if (p.X <= grip)
-                {
-                    m.Result = (IntPtr)10;
-                    return;
-                }
-                if (p.X >= ClientSize.Width - grip)
-                {
-                    m.Result = (IntPtr)11;
-                    return;
-                }
-                if (p.Y <= grip)
-                {
-                    m.Result = (IntPtr)12;
-                    return;
-                }
-                if (p.Y >= this.ClientSize.Height - grip)
-                {
-                    m.Result = (IntPtr)15;
-                    return;
-                }
+                // Rotate the image by 90 degrees clockwise
+                currentImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
+
+                // Update the PictureBox with the rotated image
+                pictureBox1.Image = currentImage;
+
+                // Force the PictureBox to redraw
+                pictureBox1.Invalidate();
             }
-            base.WndProc(ref m);
+        }
+
+        private void btnFlip_Click(object sender, EventArgs e)
+        {
+            btnHorizontalFlip.Visible = !btnHorizontalFlip.Visible;
+            btnVerticleFlip.Visible = !btnVerticleFlip.Visible;
+        }
+
+        private void btnHorizontalFlip_Click(object sender, EventArgs e)
+        {
+            // Get the current image from the PictureBox
+            Image currentImage = pictureBox1.Image;
+
+            if (currentImage != null)
+            {
+                // Flip the image horizontally
+                currentImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+                // Update the PictureBox with the flipped image
+                pictureBox1.Image = currentImage;
+
+                // Force the PictureBox to redraw
+                pictureBox1.Invalidate();
+            }
+        }
+
+        private void btnVerticleFlip_Click(object sender, EventArgs e)
+        {
+            // Get the current image from the PictureBox
+            Image currentImage = pictureBox1.Image;
+
+            if (currentImage != null)
+            {
+                // Flip the image horizontally
+                currentImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
+                // Update the PictureBox with the flipped image
+                pictureBox1.Image = currentImage;
+
+                // Force the PictureBox to redraw
+                pictureBox1.Invalidate();
+            }
         }
     }
 }

@@ -42,6 +42,10 @@
             btnGreyScale = new Button();
             saveFileDialog1 = new SaveFileDialog();
             panel2 = new Panel();
+            btnRotate = new Button();
+            btnFlip = new Button();
+            btnHorizontalFlip = new Button();
+            btnVerticleFlip = new Button();
             Header.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -184,10 +188,56 @@
             panel2.TabIndex = 9;
             panel2.Paint += panel2_Paint;
             // 
+            // btnRotate
+            // 
+            btnRotate.Location = new Point(524, 79);
+            btnRotate.Name = "btnRotate";
+            btnRotate.Size = new Size(98, 24);
+            btnRotate.TabIndex = 10;
+            btnRotate.Text = "Rotate";
+            btnRotate.UseVisualStyleBackColor = true;
+            btnRotate.Click += btnRotate_Click;
+            // 
+            // btnFlip
+            // 
+            btnFlip.Location = new Point(524, 110);
+            btnFlip.Name = "btnFlip";
+            btnFlip.Size = new Size(99, 23);
+            btnFlip.TabIndex = 11;
+            btnFlip.Text = "Flip";
+            btnFlip.UseVisualStyleBackColor = true;
+            btnFlip.Click += btnFlip_Click;
+            // 
+            // btnHorizontalFlip
+            // 
+            btnHorizontalFlip.Location = new Point(471, 142);
+            btnHorizontalFlip.Name = "btnHorizontalFlip";
+            btnHorizontalFlip.Size = new Size(92, 20);
+            btnHorizontalFlip.TabIndex = 12;
+            btnHorizontalFlip.Text = "Horizontal";
+            btnHorizontalFlip.UseVisualStyleBackColor = true;
+            btnHorizontalFlip.Visible = false;
+            btnHorizontalFlip.Click += btnHorizontalFlip_Click;
+            // 
+            // btnVerticleFlip
+            // 
+            btnVerticleFlip.Location = new Point(570, 140);
+            btnVerticleFlip.Name = "btnVerticleFlip";
+            btnVerticleFlip.Size = new Size(79, 22);
+            btnVerticleFlip.TabIndex = 13;
+            btnVerticleFlip.Text = "Verticle";
+            btnVerticleFlip.UseVisualStyleBackColor = true;
+            btnVerticleFlip.Visible = false;
+            btnVerticleFlip.Click += btnVerticleFlip_Click;
+            // 
             // Form1
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnVerticleFlip);
+            Controls.Add(btnHorizontalFlip);
+            Controls.Add(btnFlip);
+            Controls.Add(btnRotate);
             Controls.Add(panel2);
             Controls.Add(btnGreyScale);
             Controls.Add(label1);
@@ -221,5 +271,9 @@
         private Button btnGreyScale;
         private SaveFileDialog saveFileDialog1;
         private Panel panel2;
+        private Button btnRotate;
+        private Button btnFlip;
+        private Button btnHorizontalFlip;
+        private Button btnVerticleFlip;
     }
 }
