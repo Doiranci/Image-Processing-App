@@ -173,24 +173,33 @@ namespace ProjectPictureManipulting
 
         private void btnSaveImage_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "JPeg Image|*.jpg|PNG Image|*.png";
-            ImageFormat format = ImageFormat.Png;
-            if (sfd.ShowDialog() == DialogResult.OK)
+            if (pictureBox1.Image is null)
             {
-                string ext = Path.GetExtension(sfd.FileName);
-                switch (ext)
-                {
-                    case ".jpg":
-                        format = ImageFormat.Jpeg;
-                        break;
-                    case ".png":
-                        format = ImageFormat.Png;
-                        break;
-                }
-                pictureBox1.Image.Save(sfd.FileName, format);
+                EmptyPictureBoxException();
+
             }
-            label1.Text = "Image saved successfully!!!!";
+            else
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "JPeg Image|*.jpg|PNG Image|*.png";
+                ImageFormat format = ImageFormat.Png;
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    string ext = Path.GetExtension(sfd.FileName);
+                    switch (ext)
+                    {
+                        case ".jpg":
+                            format = ImageFormat.Jpeg;
+                            break;
+                        case ".png":
+                            format = ImageFormat.Png;
+                            break;
+                    }
+                    pictureBox1.Image.Save(sfd.FileName, format);
+                }
+                label1.Text = "Image saved successfully!!!!";
+            }
+
 
         }
         bool isGreyscaled;
@@ -199,7 +208,7 @@ namespace ProjectPictureManipulting
         {
             if (pictureBox1.Image is null)
             {
-                throw new Exception("Ne si zaredil snimka baluk!");
+                EmptyPictureBoxException();
             }
             else
             {
@@ -226,6 +235,11 @@ namespace ProjectPictureManipulting
 
         private void btnRotate_Click(object sender, EventArgs e)
         {
+            if (pictureBox1.Image is null)
+            {
+                EmptyPictureBoxException();
+            }
+
             // Get the current image from the PictureBox
             Image currentImage = pictureBox1.Image;
 
@@ -244,12 +258,24 @@ namespace ProjectPictureManipulting
 
         private void btnFlip_Click(object sender, EventArgs e)
         {
-            btnHorizontalFlip.Visible = !btnHorizontalFlip.Visible;
-            btnVerticleFlip.Visible = !btnVerticleFlip.Visible;
+            if (pictureBox1.Image is null)
+            {
+                EmptyPictureBoxException();
+            }
+            else
+            {
+                btnHorizontalFlip.Visible = !btnHorizontalFlip.Visible;
+                btnVerticleFlip.Visible = !btnVerticleFlip.Visible;
+            }
         }
 
         private void btnHorizontalFlip_Click(object sender, EventArgs e)
         {
+            if (pictureBox1.Image is null)
+            {
+                EmptyPictureBoxException();
+            }
+
             // Get the current image from the PictureBox
             Image currentImage = pictureBox1.Image;
 
@@ -268,6 +294,10 @@ namespace ProjectPictureManipulting
 
         private void btnVerticleFlip_Click(object sender, EventArgs e)
         {
+            if (pictureBox1.Image is null)
+            {
+                EmptyPictureBoxException();
+            }
             // Get the current image from the PictureBox
             Image currentImage = pictureBox1.Image;
 
@@ -292,13 +322,20 @@ namespace ProjectPictureManipulting
 
         private void btnBrightnessContrast_Click(object sender, EventArgs e)
         {
-            trbBrightness.Visible = !trbBrightness.Visible;
-            trbContrast.Visible = !trbContrast.Visible;
-            lblBrightness.Visible = !lblBrightness.Visible;
-            lblContrast.Visible = !lblContrast.Visible;
-            btnDefaultBNC.Visible = !btnDefaultBNC.Visible;
+            if (pictureBox1.Image is null)
+            {
+                EmptyPictureBoxException();
+            }
+            else
+            {
+                trbBrightness.Visible = !trbBrightness.Visible;
+                trbContrast.Visible = !trbContrast.Visible;
+                lblBrightness.Visible = !lblBrightness.Visible;
+                lblContrast.Visible = !lblContrast.Visible;
+                btnDefaultBNC.Visible = !btnDefaultBNC.Visible;
 
-            adjustBitmap = new Bitmap(pictureBox1.Image);
+                adjustBitmap = new Bitmap(pictureBox1.Image);
+            }
         }
 
         private void btnDefaultBNC_Click(object sender, EventArgs e)
@@ -308,6 +345,11 @@ namespace ProjectPictureManipulting
             pictureBox1.Image = AdjustBrightnessContrast(adjustBitmap, trbContrast.Value, trbBrightness.Value);
         }
 
+
+        public static void EmptyPictureBoxException()
+        {
+            MessageBox.Show("You need to insert picture first!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
     }
 
 }
