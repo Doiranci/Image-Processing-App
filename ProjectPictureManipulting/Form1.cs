@@ -3,12 +3,38 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using System.Drawing;
+using System.IO;
 
 namespace ProjectPictureManipulting
 {
 
     public partial class Form1 : Form
     {
+        public Bitmap AdjustBrightnessContrast(Image image, int contrastValue, int brightnessValue)
+        {
+            float brightness = (brightnessValue / 100.0f);
+            float contrast = contrastValue / 100.0f;
+            var bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppArgb);
+
+            using (var g = Graphics.FromImage(bitmap))
+            using (var attributes = new ImageAttributes())
+            {
+                float[][] matrix = {
+            new float[] { contrast, 0, 0, 0, 0},
+            new float[] {0, contrast, 0, 0, 0},
+            new float[] {0, 0, contrast, 0, 0},
+            new float[] {0, 0, 0, 1, 0},
+            new float[] {brightness, brightness, brightness, 1, 1}
+        };
+
+                ColorMatrix colorMatrix = new ColorMatrix(matrix);
+                attributes.SetColorMatrix(colorMatrix);
+                g.DrawImage(image, new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                    0, 0, bitmap.Width, bitmap.Height, GraphicsUnit.Pixel, attributes);
+                return bitmap;
+            }
+        }
+
         int grip = 16;
         int caption = 40;
         protected override void WndProc(ref Message m) // This makes the form drag-resizable
@@ -138,8 +164,9 @@ namespace ProjectPictureManipulting
             open.Filter = "Image Files(*.jpg; *.jpeg;  *.gif; *.bmp;)|*.jpg; *.jpeg;  *.gif; *.bmp;";
             if (open.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.Image = new Bitmap(open.FileName);
-                originaleImage = new(pictureBox1.Image);
+                MemoryStream ms = new MemoryStream(File.ReadAllBytes(open.FileName));
+                pictureBox1.Image = new Bitmap(ms);
+                originalImage = new Bitmap(ms);
             }
 
         }
@@ -167,21 +194,28 @@ namespace ProjectPictureManipulting
 
         }
         bool isGreyscaled;
-        Bitmap originaleImage;
+        Bitmap originalImage;
         private void btnGreyScale_Click(object sender, EventArgs e)
         {
-            Bitmap defaultImage = new(pictureBox1.Image);
-            if (!isGreyscaled)
+            if (pictureBox1.Image is null)
             {
-                pictureBox1.Image = ConvertToGrayscale(defaultImage);
-                isGreyscaled = true;
+                throw new Exception("Ne si zaredil snimka baluk!");
             }
             else
             {
-                pictureBox1.Image = originaleImage;
-                isGreyscaled = false;
-            }
+                Bitmap defaultImage = new(pictureBox1.Image);
 
+                if (!isGreyscaled)
+                {
+                    pictureBox1.Image = ConvertToGrayscale(defaultImage);
+                    isGreyscaled = true;
+                }
+                else
+                {
+                    pictureBox1.Image = originalImage;
+                    isGreyscaled = false;
+                }
+            }
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -249,5 +283,31 @@ namespace ProjectPictureManipulting
                 pictureBox1.Invalidate();
             }
         }
+        Bitmap adjustBitmap;
+        private void Slider_Scroll(object sender, EventArgs e)
+        {
+            //pictureBox1.Image?.Dispose();
+            pictureBox1.Image = AdjustBrightnessContrast(adjustBitmap, trbContrast.Value, trbBrightness.Value);
+        }
+
+        private void btnBrightnessContrast_Click(object sender, EventArgs e)
+        {
+            trbBrightness.Visible = !trbBrightness.Visible;
+            trbContrast.Visible = !trbContrast.Visible;
+            lblBrightness.Visible = !lblBrightness.Visible;
+            lblContrast.Visible = !lblContrast.Visible;
+            btnDefaultBNC.Visible = !btnDefaultBNC.Visible;
+
+            adjustBitmap = new Bitmap(pictureBox1.Image);
+        }
+
+        private void btnDefaultBNC_Click(object sender, EventArgs e)
+        {
+            trbContrast.Value = 100;
+            trbBrightness.Value = 0;
+            pictureBox1.Image = AdjustBrightnessContrast(adjustBitmap, trbContrast.Value, trbBrightness.Value);
+        }
+
     }
+
 }

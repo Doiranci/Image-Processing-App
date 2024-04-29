@@ -37,7 +37,6 @@
             btnUploadImage = new Button();
             btnSaveImage = new Button();
             pictureBox1 = new PictureBox();
-            textBox1 = new TextBox();
             label1 = new Label();
             btnGreyScale = new Button();
             saveFileDialog1 = new SaveFileDialog();
@@ -46,10 +45,19 @@
             btnFlip = new Button();
             btnHorizontalFlip = new Button();
             btnVerticleFlip = new Button();
+            trbContrast = new TrackBar();
+            trbBrightness = new TrackBar();
+            btnBrightnessContrast = new Button();
+            lblContrast = new Label();
+            lblBrightness = new Label();
+            btnDefaultBNC = new Button();
+            btnReisize = new Button();
             Header.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trbContrast).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trbBrightness).BeginInit();
             SuspendLayout();
             // 
             // Header
@@ -123,7 +131,7 @@
             // 
             // btnUploadImage
             // 
-            btnUploadImage.Location = new Point(310, 43);
+            btnUploadImage.Location = new Point(15, 45);
             btnUploadImage.Name = "btnUploadImage";
             btnUploadImage.Size = new Size(139, 32);
             btnUploadImage.TabIndex = 3;
@@ -133,7 +141,7 @@
             // 
             // btnSaveImage
             // 
-            btnSaveImage.Location = new Point(455, 45);
+            btnSaveImage.Location = new Point(160, 47);
             btnSaveImage.Name = "btnSaveImage";
             btnSaveImage.Size = new Size(63, 29);
             btnSaveImage.TabIndex = 4;
@@ -144,21 +152,12 @@
             // pictureBox1
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox1.Location = new Point(13, 12);
+            pictureBox1.Location = new Point(3, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(412, 275);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.Size = new Size(431, 293);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(9, 48);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(295, 23);
-            textBox1.TabIndex = 6;
-            textBox1.Text = " ";
-            textBox1.Visible = false;
             // 
             // label1
             // 
@@ -170,7 +169,7 @@
             // 
             // btnGreyScale
             // 
-            btnGreyScale.Location = new Point(524, 43);
+            btnGreyScale.Location = new Point(229, 45);
             btnGreyScale.Name = "btnGreyScale";
             btnGreyScale.Size = new Size(98, 30);
             btnGreyScale.TabIndex = 8;
@@ -181,6 +180,7 @@
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel2.BackColor = SystemColors.ButtonShadow;
             panel2.Controls.Add(pictureBox1);
             panel2.Location = new Point(12, 139);
             panel2.Name = "panel2";
@@ -190,7 +190,7 @@
             // 
             // btnRotate
             // 
-            btnRotate.Location = new Point(524, 79);
+            btnRotate.Location = new Point(15, 83);
             btnRotate.Name = "btnRotate";
             btnRotate.Size = new Size(98, 24);
             btnRotate.TabIndex = 10;
@@ -200,7 +200,7 @@
             // 
             // btnFlip
             // 
-            btnFlip.Location = new Point(524, 110);
+            btnFlip.Location = new Point(160, 84);
             btnFlip.Name = "btnFlip";
             btnFlip.Size = new Size(99, 23);
             btnFlip.TabIndex = 11;
@@ -210,9 +210,9 @@
             // 
             // btnHorizontalFlip
             // 
-            btnHorizontalFlip.Location = new Point(471, 142);
+            btnHorizontalFlip.Location = new Point(130, 111);
             btnHorizontalFlip.Name = "btnHorizontalFlip";
-            btnHorizontalFlip.Size = new Size(92, 20);
+            btnHorizontalFlip.Size = new Size(79, 22);
             btnHorizontalFlip.TabIndex = 12;
             btnHorizontalFlip.Text = "Horizontal";
             btnHorizontalFlip.UseVisualStyleBackColor = true;
@@ -221,7 +221,7 @@
             // 
             // btnVerticleFlip
             // 
-            btnVerticleFlip.Location = new Point(570, 140);
+            btnVerticleFlip.Location = new Point(215, 111);
             btnVerticleFlip.Name = "btnVerticleFlip";
             btnVerticleFlip.Size = new Size(79, 22);
             btnVerticleFlip.TabIndex = 13;
@@ -230,10 +230,89 @@
             btnVerticleFlip.Visible = false;
             btnVerticleFlip.Click += btnVerticleFlip_Click;
             // 
+            // trbContrast
+            // 
+            trbContrast.Location = new Point(447, 79);
+            trbContrast.Maximum = 200;
+            trbContrast.Name = "trbContrast";
+            trbContrast.Size = new Size(154, 45);
+            trbContrast.TabIndex = 14;
+            trbContrast.Value = 100;
+            trbContrast.Visible = false;
+            trbContrast.Scroll += Slider_Scroll;
+            // 
+            // trbBrightness
+            // 
+            trbBrightness.Location = new Point(632, 79);
+            trbBrightness.Maximum = 100;
+            trbBrightness.Minimum = -100;
+            trbBrightness.Name = "trbBrightness";
+            trbBrightness.Size = new Size(168, 45);
+            trbBrightness.TabIndex = 15;
+            trbBrightness.Visible = false;
+            trbBrightness.Scroll += Slider_Scroll;
+            // 
+            // btnBrightnessContrast
+            // 
+            btnBrightnessContrast.Location = new Point(550, 49);
+            btnBrightnessContrast.Name = "btnBrightnessContrast";
+            btnBrightnessContrast.Size = new Size(156, 24);
+            btnBrightnessContrast.TabIndex = 16;
+            btnBrightnessContrast.Text = "ContrastAndBrightness";
+            btnBrightnessContrast.UseVisualStyleBackColor = true;
+            btnBrightnessContrast.Click += btnBrightnessContrast_Click;
+            // 
+            // lblContrast
+            // 
+            lblContrast.AutoSize = true;
+            lblContrast.Location = new Point(472, 127);
+            lblContrast.Name = "lblContrast";
+            lblContrast.Size = new Size(52, 15);
+            lblContrast.TabIndex = 17;
+            lblContrast.Text = "Contrast";
+            lblContrast.Visible = false;
+            // 
+            // lblBrightness
+            // 
+            lblBrightness.AutoSize = true;
+            lblBrightness.Location = new Point(695, 127);
+            lblBrightness.Name = "lblBrightness";
+            lblBrightness.Size = new Size(62, 15);
+            lblBrightness.TabIndex = 18;
+            lblBrightness.Text = "Brightness";
+            lblBrightness.Visible = false;
+            // 
+            // btnDefaultBNC
+            // 
+            btnDefaultBNC.Location = new Point(591, 123);
+            btnDefaultBNC.Name = "btnDefaultBNC";
+            btnDefaultBNC.Size = new Size(54, 23);
+            btnDefaultBNC.TabIndex = 19;
+            btnDefaultBNC.Text = "Default";
+            btnDefaultBNC.UseVisualStyleBackColor = true;
+            btnDefaultBNC.Visible = false;
+            btnDefaultBNC.Click += btnDefaultBNC_Click;
+            // 
+            // btnReisize
+            // 
+            btnReisize.Location = new Point(472, 196);
+            btnReisize.Name = "btnReisize";
+            btnReisize.Size = new Size(77, 31);
+            btnReisize.TabIndex = 20;
+            btnReisize.Text = "Resize";
+            btnReisize.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnReisize);
+            Controls.Add(btnDefaultBNC);
+            Controls.Add(lblBrightness);
+            Controls.Add(lblContrast);
+            Controls.Add(btnBrightnessContrast);
+            Controls.Add(trbBrightness);
+            Controls.Add(trbContrast);
             Controls.Add(btnVerticleFlip);
             Controls.Add(btnHorizontalFlip);
             Controls.Add(btnFlip);
@@ -241,18 +320,20 @@
             Controls.Add(panel2);
             Controls.Add(btnGreyScale);
             Controls.Add(label1);
-            Controls.Add(textBox1);
             Controls.Add(btnSaveImage);
             Controls.Add(btnUploadImage);
             Controls.Add(Header);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Header.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)trbContrast).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trbBrightness).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -266,7 +347,6 @@
         private Button btnUploadImage;
         private Button btnSaveImage;
         private PictureBox pictureBox1;
-        private TextBox textBox1;
         private Label label1;
         private Button btnGreyScale;
         private SaveFileDialog saveFileDialog1;
@@ -275,5 +355,12 @@
         private Button btnFlip;
         private Button btnHorizontalFlip;
         private Button btnVerticleFlip;
+        private TrackBar trbContrast;
+        private TrackBar trbBrightness;
+        private Button btnBrightnessContrast;
+        private Label lblContrast;
+        private Label lblBrightness;
+        private Button btnDefaultBNC;
+        private Button btnReisize;
     }
 }
