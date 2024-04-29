@@ -346,8 +346,6 @@ namespace ProjectPictureManipulting
             pictureBox1.Image = AdjustBrightnessContrast(adjustBitmap, trbContrast.Value, trbBrightness.Value);
         }
 
-<<<<<<< HEAD:ProjectPictureManipulting/Main.cs
-<<<<<<< HEAD:ProjectPictureManipulting/Main.cs
         private void btnReisize_Click(object sender, EventArgs e)
         {
             ResizeImage resize = new ResizeImage();
@@ -355,18 +353,11 @@ namespace ProjectPictureManipulting
             resize.Show();
         }
 
-=======
-=======
->>>>>>> ce251d2ed42d2d2426450d2369a04d98779f927c:ProjectPictureManipulting/Form1.cs
-
         public static void EmptyPictureBoxException()
         {
             MessageBox.Show("You need to insert picture first!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
-<<<<<<< HEAD:ProjectPictureManipulting/Main.cs
->>>>>>> ce251d2ed42d2d2426450d2369a04d98779f927c:ProjectPictureManipulting/Form1.cs
-=======
->>>>>>> ce251d2ed42d2d2426450d2369a04d98779f927c:ProjectPictureManipulting/Form1.cs
+
     }
 
 }
