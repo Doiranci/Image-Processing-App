@@ -114,6 +114,7 @@ namespace ProjectPictureManipulting
             g.Dispose();
             return newBitmap;
         }
+        //Martin e gei
 
         public Main()
         {
