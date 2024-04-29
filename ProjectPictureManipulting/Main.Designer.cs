@@ -1,6 +1,6 @@
 ﻿namespace ProjectPictureManipulting
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             Header = new Panel();
             panel1 = new Panel();
             btnClose = new Button();
@@ -301,6 +301,7 @@
             btnReisize.TabIndex = 20;
             btnReisize.Text = "Resize";
             btnReisize.UseVisualStyleBackColor = true;
+            btnReisize.Click += btnReisize_Click;
             // 
             // Form1
             // 

@@ -8,7 +8,7 @@ using System.IO;
 namespace ProjectPictureManipulting
 {
 
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         public Bitmap AdjustBrightnessContrast(Image image, int contrastValue, int brightnessValue)
         {
@@ -115,7 +115,7 @@ namespace ProjectPictureManipulting
             return newBitmap;
         }
 
-        public Form1()
+        public Main()
         {
             InitializeComponent();
             SetStyle(ControlStyles.ResizeRedraw, true);
@@ -306,6 +306,13 @@ namespace ProjectPictureManipulting
             trbContrast.Value = 100;
             trbBrightness.Value = 0;
             pictureBox1.Image = AdjustBrightnessContrast(adjustBitmap, trbContrast.Value, trbBrightness.Value);
+        }
+
+        private void btnReisize_Click(object sender, EventArgs e)
+        {
+            ResizeImage resize = new ResizeImage();
+            resize.SetImage(pictureBox1.Image);
+            resize.Show();
         }
 
     }
