@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
+using System.Drawing.Drawing2D;
 
 namespace ProjectPictureManipulting
 {
