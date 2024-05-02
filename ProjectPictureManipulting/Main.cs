@@ -11,6 +11,10 @@ namespace ProjectPictureManipulting
 
     public partial class Main : Form
     {
+        public void LoadImageOnMainForm(Image image)
+        {
+            pictureBox1.Image = image;
+        }
         public Bitmap AdjustBrightnessContrast(Image image, int contrastValue, int brightnessValue)
         {
             float brightness = (brightnessValue / 100.0f);
@@ -350,8 +354,9 @@ namespace ProjectPictureManipulting
         private void btnReisize_Click(object sender, EventArgs e)
         {
             ResizeImage resize = new ResizeImage();
-            resize.SetImage(pictureBox1.Image);
+            resize.LoadImageOnResizeForm(pictureBox1.Image);
             resize.Show();
+            
         }
 
         public static void EmptyPictureBoxException()
@@ -359,6 +364,7 @@ namespace ProjectPictureManipulting
             MessageBox.Show("You need to insert picture first!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
+        
     }
 
 }

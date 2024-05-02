@@ -16,61 +16,48 @@ namespace ProjectPictureManipulting
     public partial class ResizeImage : Form
     {
         Image target_image;
+        Image defaultImage;
         int width;
         int height;
         public ResizeImage()
         {
             InitializeComponent();
         }
-        private void ResizeImage_Load(object sender, EventArgs e)
-        {
-            target_image = pictureBoxResize.Image;
-            width = target_image.Width;
-            height = target_image.Height;
-        }
-        private void btnSaveResize_Click(object sender, EventArgs e)
-        {
-            if (pictureBoxResize.Image is null)
-            {
-                //EmptyPictureBoxException();
-
-            }
-            else
-            {
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "JPeg Image|*.jpg|PNG Image|*.png";
-                ImageFormat format = ImageFormat.Png;
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    string ext = Path.GetExtension(sfd.FileName);
-                    switch (ext)
-                    {
-                        case ".jpg":
-                            format = ImageFormat.Jpeg;
-                            break;
-                        case ".png":
-                            format = ImageFormat.Png;
-                            break;
-                    }
-                    pictureBoxResize.Image.Save(sfd.FileName, format);
-                }
-                label1.Text = "Image saved successfully!!!!";
-            }
-
-
-        }
-
-        private void btnDefaultResize_Click(object sender, EventArgs e)
-        {
-
-        }
-        public void SetImage(Image image)
+        public void LoadImageOnResizeForm(Image image)
         {
             pictureBoxResize.Image = image;
         }
 
+        private void ResizeImage_Load(object sender, EventArgs e)
+        {
+            target_image = pictureBoxResize.Image;
+            defaultImage = pictureBoxResize.Image;
+            width = target_image.Width;
+            height = target_image.Height;
+        }
+        
+        private void btnSaveResize_Click(object sender, EventArgs e)
+        {
+            Main mainWindow = new();
+            mainWindow.LoadImageOnMainForm(pictureBoxResize.Image);
+            mainWindow.Show();
+        }
+
+        private void btnDefaultResize_Click(object sender, EventArgs e)
+        {
+            pictureBoxResize.Image = defaultImage;
+        }
+
         private Bitmap ResizeNow(int target_width, int target_height)
         {
+            if (target_width < 1)
+            {
+                target_width = 1;
+            }
+            if (target_height < 1)
+            {
+                target_height = 1;
+            }
             Rectangle dest_rect = new Rectangle(0, 0, target_width, target_height);
             Bitmap destImage = new Bitmap(target_width, target_height);
             destImage.SetResolution(target_image.HorizontalResolution, target_image.VerticalResolution);
@@ -89,19 +76,11 @@ namespace ProjectPictureManipulting
             }
             return destImage;
         }
-
-        private void trbWidth_Scroll(object sender, EventArgs e)
+        private void btnPreviewImage_Click(object sender, EventArgs e)
         {
-            width = (target_image.Width * trbWidth.Value) / 100;
+            width = int.Parse(txtbWidth.Text);
+            height = int.Parse(txtbHeight.Text);
             pictureBoxResize.Image = ResizeNow(width, height);
         }
-
-        private void trbHeight_Scroll(object sender, EventArgs e)
-        {
-            height = (target_image.Height * trbHeight.Value) / 100;
-            pictureBoxResize.Image = ResizeNow(width, height);
-        }
-
-
     }
 }
