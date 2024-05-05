@@ -34,8 +34,10 @@ namespace ProjectPictureManipulting
             defaultImage = pictureBoxResize.Image;
             width = target_image.Width;
             height = target_image.Height;
+            txtbWidth.Text = width.ToString();
+            txtbHeight.Text = height.ToString();
         }
-        
+
         private void btnSaveResize_Click(object sender, EventArgs e)
         {
             Main mainWindow = new();
@@ -81,6 +83,158 @@ namespace ProjectPictureManipulting
             width = int.Parse(txtbWidth.Text);
             height = int.Parse(txtbHeight.Text);
             pictureBoxResize.Image = ResizeNow(width, height);
+        }
+
+        private void pnl1080x1080_Click(object sender, EventArgs e)
+        {
+            width = 1080;
+            height = 1080;
+            txtbWidth.Text = width.ToString();
+            txtbHeight.Text = height.ToString();
+            pictureBoxResize.Image = ResizeNow(width, height);
+        }
+
+        private void pnl1280x720_Click(object sender, EventArgs e)
+        {
+            width = 1280;
+            height = 720;
+            txtbWidth.Text = width.ToString();
+            txtbHeight.Text = height.ToString();
+            pictureBoxResize.Image = ResizeNow(width, height);
+        }
+
+        private void pnl1920x1080_Click(object sender, EventArgs e)
+        {
+            width = 1920;
+            height = 1080;
+            txtbWidth.Text = width.ToString();
+            txtbHeight.Text = height.ToString();
+            pictureBoxResize.Image = ResizeNow(width, height);
+        }
+
+        private void pnl1080x1920_Click(object sender, EventArgs e)
+        {
+            width = 1080;
+            height = 1920;
+            txtbWidth.Text = width.ToString();
+            txtbHeight.Text = height.ToString();
+            pictureBoxResize.Image = ResizeNow(width, height);
+        }
+
+        private void pnl2560x1440_Click(object sender, EventArgs e)
+        {
+            width = 2560;
+            height = 1440;
+            txtbWidth.Text = width.ToString();
+            txtbHeight.Text = height.ToString();
+            pictureBoxResize.Image = ResizeNow(width, height);
+        }
+
+        private void pnl1200x675_Click(object sender, EventArgs e)
+        {
+            width = 1200;
+            height = 675;
+            txtbWidth.Text = width.ToString();
+            txtbHeight.Text = height.ToString();
+            pictureBoxResize.Image = ResizeNow(width, height);
+        }
+
+        private void pnl3840x2160_Click(object sender, EventArgs e)
+        {
+            width = 3840;
+            height = 2160;
+            txtbWidth.Text = width.ToString();
+            txtbHeight.Text = height.ToString();
+            pictureBoxResize.Image = ResizeNow(width, height);
+        }
+
+        private void pnl7680x4320_Click(object sender, EventArgs e)
+        {
+            width = 7680;
+            height = 4320;
+            txtbWidth.Text = width.ToString();
+            txtbHeight.Text = height.ToString();
+            pictureBoxResize.Image = ResizeNow(width, height);
+        }
+
+        private void lblInstagramPost_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

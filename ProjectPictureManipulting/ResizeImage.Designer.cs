@@ -37,45 +37,41 @@ namespace ProjectPictureManipulting
             txtbHeight = new TextBox();
             btnSaveResize = new Button();
             btnDefaultResize = new Button();
-            panel2 = new Panel();
+            pnl1080x1080 = new Panel();
             label4 = new Label();
             lblInstagramPost = new Label();
-            panel3 = new Panel();
+            pnl1920x1080 = new Panel();
             label5 = new Label();
             label1 = new Label();
-            panel4 = new Panel();
+            pnl1080x1920 = new Panel();
             label3 = new Label();
             label2 = new Label();
-            panel5 = new Panel();
+            pnl2560x1440 = new Panel();
             label7 = new Label();
             label6 = new Label();
-            panel6 = new Panel();
+            pnl3840x2160 = new Panel();
             label9 = new Label();
             label8 = new Label();
-            panel7 = new Panel();
+            pnl7680x4320 = new Panel();
             label11 = new Label();
             label10 = new Label();
-            panel8 = new Panel();
+            pnl1280x720 = new Panel();
             label13 = new Label();
             label12 = new Label();
-            panel9 = new Panel();
+            pnl1200x675 = new Panel();
             label15 = new Label();
             label14 = new Label();
-            panel10 = new Panel();
-            label17 = new Label();
-            label16 = new Label();
             btnPreviewImage = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxResize).BeginInit();
-            panel2.SuspendLayout();
-            panel3.SuspendLayout();
-            panel4.SuspendLayout();
-            panel5.SuspendLayout();
-            panel6.SuspendLayout();
-            panel7.SuspendLayout();
-            panel8.SuspendLayout();
-            panel9.SuspendLayout();
-            panel10.SuspendLayout();
+            pnl1080x1080.SuspendLayout();
+            pnl1920x1080.SuspendLayout();
+            pnl1080x1920.SuspendLayout();
+            pnl2560x1440.SuspendLayout();
+            pnl3840x2160.SuspendLayout();
+            pnl7680x4320.SuspendLayout();
+            pnl1280x720.SuspendLayout();
+            pnl1200x675.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -159,16 +155,17 @@ namespace ProjectPictureManipulting
             btnDefaultResize.UseVisualStyleBackColor = true;
             btnDefaultResize.Click += btnDefaultResize_Click;
             // 
-            // panel2
+            // pnl1080x1080
             // 
-            panel2.BackColor = SystemColors.AppWorkspace;
-            panel2.Controls.Add(label4);
-            panel2.Controls.Add(lblInstagramPost);
-            panel2.Cursor = Cursors.Hand;
-            panel2.Location = new Point(573, 21);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(91, 88);
-            panel2.TabIndex = 9;
+            pnl1080x1080.BackColor = SystemColors.AppWorkspace;
+            pnl1080x1080.Controls.Add(label4);
+            pnl1080x1080.Controls.Add(lblInstagramPost);
+            pnl1080x1080.Cursor = Cursors.Hand;
+            pnl1080x1080.Location = new Point(573, 21);
+            pnl1080x1080.Name = "pnl1080x1080";
+            pnl1080x1080.Size = new Size(91, 88);
+            pnl1080x1080.TabIndex = 9;
+            pnl1080x1080.Click += pnl1080x1080_Click;
             // 
             // label4
             // 
@@ -179,6 +176,7 @@ namespace ProjectPictureManipulting
             label4.TabIndex = 1;
             label4.Text = "1080 x 1080 px";
             label4.TextAlign = ContentAlignment.MiddleCenter;
+            label4.Click += pnl1080x1080_Click;
             // 
             // lblInstagramPost
             // 
@@ -190,17 +188,19 @@ namespace ProjectPictureManipulting
             lblInstagramPost.TabIndex = 0;
             lblInstagramPost.Text = "Instagram \r\nPost";
             lblInstagramPost.TextAlign = ContentAlignment.MiddleCenter;
+            lblInstagramPost.Click += pnl1080x1080_Click;
             // 
-            // panel3
+            // pnl1920x1080
             // 
-            panel3.BackColor = SystemColors.AppWorkspace;
-            panel3.Controls.Add(label5);
-            panel3.Controls.Add(label1);
-            panel3.Cursor = Cursors.Hand;
-            panel3.Location = new Point(695, 136);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(146, 88);
-            panel3.TabIndex = 11;
+            pnl1920x1080.BackColor = SystemColors.AppWorkspace;
+            pnl1920x1080.Controls.Add(label5);
+            pnl1920x1080.Controls.Add(label1);
+            pnl1920x1080.Cursor = Cursors.Hand;
+            pnl1920x1080.Location = new Point(695, 136);
+            pnl1920x1080.Name = "pnl1920x1080";
+            pnl1920x1080.Size = new Size(146, 88);
+            pnl1920x1080.TabIndex = 11;
+            pnl1920x1080.Click += pnl1920x1080_Click;
             // 
             // label5
             // 
@@ -211,6 +211,7 @@ namespace ProjectPictureManipulting
             label5.TabIndex = 1;
             label5.Text = "1920 x 1080 px";
             label5.TextAlign = ContentAlignment.MiddleCenter;
+            label5.Click += pnl1920x1080_Click;
             // 
             // label1
             // 
@@ -221,17 +222,19 @@ namespace ProjectPictureManipulting
             label1.TabIndex = 0;
             label1.Text = "Full HD";
             label1.TextAlign = ContentAlignment.MiddleCenter;
+            label1.Click += pnl1920x1080_Click;
             // 
-            // panel4
+            // pnl1080x1920
             // 
-            panel4.BackColor = SystemColors.AppWorkspace;
-            panel4.Controls.Add(label3);
-            panel4.Controls.Add(label2);
-            panel4.Cursor = Cursors.Hand;
-            panel4.Location = new Point(573, 136);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(91, 150);
-            panel4.TabIndex = 13;
+            pnl1080x1920.BackColor = SystemColors.AppWorkspace;
+            pnl1080x1920.Controls.Add(label3);
+            pnl1080x1920.Controls.Add(label2);
+            pnl1080x1920.Cursor = Cursors.Hand;
+            pnl1080x1920.Location = new Point(573, 136);
+            pnl1080x1920.Name = "pnl1080x1920";
+            pnl1080x1920.Size = new Size(91, 150);
+            pnl1080x1920.TabIndex = 13;
+            pnl1080x1920.Click += pnl1080x1920_Click;
             // 
             // label3
             // 
@@ -242,6 +245,7 @@ namespace ProjectPictureManipulting
             label3.TabIndex = 1;
             label3.Text = "1080 x 1920 px";
             label3.TextAlign = ContentAlignment.MiddleCenter;
+            label3.Click += pnl1080x1920_Click;
             // 
             // label2
             // 
@@ -253,17 +257,19 @@ namespace ProjectPictureManipulting
             label2.TabIndex = 0;
             label2.Text = "Instagram\r\nStory";
             label2.TextAlign = ContentAlignment.MiddleCenter;
+            label2.Click += pnl1080x1920_Click;
             // 
-            // panel5
+            // pnl2560x1440
             // 
-            panel5.BackColor = SystemColors.AppWorkspace;
-            panel5.Controls.Add(label7);
-            panel5.Controls.Add(label6);
-            panel5.Cursor = Cursors.Hand;
-            panel5.Location = new Point(695, 253);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(147, 88);
-            panel5.TabIndex = 15;
+            pnl2560x1440.BackColor = SystemColors.AppWorkspace;
+            pnl2560x1440.Controls.Add(label7);
+            pnl2560x1440.Controls.Add(label6);
+            pnl2560x1440.Cursor = Cursors.Hand;
+            pnl2560x1440.Location = new Point(695, 253);
+            pnl2560x1440.Name = "pnl2560x1440";
+            pnl2560x1440.Size = new Size(147, 88);
+            pnl2560x1440.TabIndex = 15;
+            pnl2560x1440.Click += pnl2560x1440_Click;
             // 
             // label7
             // 
@@ -273,6 +279,7 @@ namespace ProjectPictureManipulting
             label7.Size = new Size(83, 15);
             label7.TabIndex = 1;
             label7.Text = "2560 x 1440 px";
+            label7.Click += pnl2560x1440_Click;
             // 
             // label6
             // 
@@ -283,17 +290,19 @@ namespace ProjectPictureManipulting
             label6.TabIndex = 0;
             label6.Text = "QHD / 2K";
             label6.TextAlign = ContentAlignment.MiddleCenter;
+            label6.Click += pnl2560x1440_Click;
             // 
-            // panel6
+            // pnl3840x2160
             // 
-            panel6.BackColor = SystemColors.AppWorkspace;
-            panel6.Controls.Add(label9);
-            panel6.Controls.Add(label8);
-            panel6.Cursor = Cursors.Hand;
-            panel6.Location = new Point(695, 371);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(147, 88);
-            panel6.TabIndex = 16;
+            pnl3840x2160.BackColor = SystemColors.AppWorkspace;
+            pnl3840x2160.Controls.Add(label9);
+            pnl3840x2160.Controls.Add(label8);
+            pnl3840x2160.Cursor = Cursors.Hand;
+            pnl3840x2160.Location = new Point(695, 371);
+            pnl3840x2160.Name = "pnl3840x2160";
+            pnl3840x2160.Size = new Size(147, 88);
+            pnl3840x2160.TabIndex = 16;
+            pnl3840x2160.Click += pnl3840x2160_Click;
             // 
             // label9
             // 
@@ -303,6 +312,7 @@ namespace ProjectPictureManipulting
             label9.Size = new Size(83, 15);
             label9.TabIndex = 1;
             label9.Text = "3840 x 2160 px";
+            label9.Click += pnl3840x2160_Click;
             // 
             // label8
             // 
@@ -312,17 +322,19 @@ namespace ProjectPictureManipulting
             label8.Size = new Size(76, 15);
             label8.TabIndex = 0;
             label8.Text = "Ultra HD / 4K";
+            label8.Click += pnl3840x2160_Click;
             // 
-            // panel7
+            // pnl7680x4320
             // 
-            panel7.BackColor = SystemColors.AppWorkspace;
-            panel7.Controls.Add(label11);
-            panel7.Controls.Add(label10);
-            panel7.Cursor = Cursors.Hand;
-            panel7.Location = new Point(695, 487);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(147, 88);
-            panel7.TabIndex = 17;
+            pnl7680x4320.BackColor = SystemColors.AppWorkspace;
+            pnl7680x4320.Controls.Add(label11);
+            pnl7680x4320.Controls.Add(label10);
+            pnl7680x4320.Cursor = Cursors.Hand;
+            pnl7680x4320.Location = new Point(695, 487);
+            pnl7680x4320.Name = "pnl7680x4320";
+            pnl7680x4320.Size = new Size(147, 88);
+            pnl7680x4320.TabIndex = 17;
+            pnl7680x4320.Click += pnl7680x4320_Click;
             // 
             // label11
             // 
@@ -332,6 +344,7 @@ namespace ProjectPictureManipulting
             label11.Size = new Size(83, 15);
             label11.TabIndex = 1;
             label11.Text = "7680 × 4320 px";
+            label11.Click += pnl7680x4320_Click;
             // 
             // label10
             // 
@@ -342,17 +355,19 @@ namespace ProjectPictureManipulting
             label10.TabIndex = 0;
             label10.Text = "UHD / 8K";
             label10.TextAlign = ContentAlignment.MiddleCenter;
+            label10.Click += pnl7680x4320_Click;
             // 
-            // panel8
+            // pnl1280x720
             // 
-            panel8.BackColor = SystemColors.AppWorkspace;
-            panel8.Controls.Add(label13);
-            panel8.Controls.Add(label12);
-            panel8.Cursor = Cursors.Hand;
-            panel8.Location = new Point(695, 21);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(146, 88);
-            panel8.TabIndex = 18;
+            pnl1280x720.BackColor = SystemColors.AppWorkspace;
+            pnl1280x720.Controls.Add(label13);
+            pnl1280x720.Controls.Add(label12);
+            pnl1280x720.Cursor = Cursors.Hand;
+            pnl1280x720.Location = new Point(695, 21);
+            pnl1280x720.Name = "pnl1280x720";
+            pnl1280x720.Size = new Size(146, 88);
+            pnl1280x720.TabIndex = 18;
+            pnl1280x720.Click += pnl1280x720_Click;
             // 
             // label13
             // 
@@ -362,6 +377,7 @@ namespace ProjectPictureManipulting
             label13.Size = new Size(77, 15);
             label13.TabIndex = 1;
             label13.Text = "1280 x 720 px";
+            label13.Click += pnl1280x720_Click;
             // 
             // label12
             // 
@@ -371,17 +387,19 @@ namespace ProjectPictureManipulting
             label12.Size = new Size(24, 15);
             label12.TabIndex = 0;
             label12.Text = "HD";
+            label12.Click += pnl1280x720_Click;
             // 
-            // panel9
+            // pnl1200x675
             // 
-            panel9.BackColor = SystemColors.AppWorkspace;
-            panel9.Controls.Add(label15);
-            panel9.Controls.Add(label14);
-            panel9.Cursor = Cursors.Hand;
-            panel9.Location = new Point(547, 316);
-            panel9.Name = "panel9";
-            panel9.Size = new Size(117, 85);
-            panel9.TabIndex = 19;
+            pnl1200x675.BackColor = SystemColors.AppWorkspace;
+            pnl1200x675.Controls.Add(label15);
+            pnl1200x675.Controls.Add(label14);
+            pnl1200x675.Cursor = Cursors.Hand;
+            pnl1200x675.Location = new Point(547, 316);
+            pnl1200x675.Name = "pnl1200x675";
+            pnl1200x675.Size = new Size(117, 85);
+            pnl1200x675.TabIndex = 19;
+            pnl1200x675.Click += pnl1200x675_Click;
             // 
             // label15
             // 
@@ -392,6 +410,7 @@ namespace ProjectPictureManipulting
             label15.Size = new Size(77, 15);
             label15.TabIndex = 1;
             label15.Text = "1200 x 675 px";
+            label15.Click += pnl1200x675_Click;
             // 
             // label14
             // 
@@ -402,35 +421,7 @@ namespace ProjectPictureManipulting
             label14.Size = new Size(42, 30);
             label14.TabIndex = 0;
             label14.Text = "Twitter\r\n  Post";
-            // 
-            // panel10
-            // 
-            panel10.BackColor = SystemColors.AppWorkspace;
-            panel10.Controls.Add(label17);
-            panel10.Controls.Add(label16);
-            panel10.Cursor = Cursors.Hand;
-            panel10.Location = new Point(547, 427);
-            panel10.Name = "panel10";
-            panel10.Size = new Size(117, 82);
-            panel10.TabIndex = 20;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Location = new Point(20, 57);
-            label17.Name = "label17";
-            label17.Size = new Size(77, 15);
-            label17.TabIndex = 1;
-            label17.Text = "1280 x 720 px";
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Location = new Point(25, 13);
-            label16.Name = "label16";
-            label16.Size = new Size(64, 30);
-            label16.TabIndex = 0;
-            label16.Text = "  YouTube\r\nThumbnail\r\n";
+            label14.Click += pnl1200x675_Click;
             // 
             // btnPreviewImage
             // 
@@ -449,15 +440,14 @@ namespace ProjectPictureManipulting
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(876, 654);
             Controls.Add(btnPreviewImage);
-            Controls.Add(panel10);
-            Controls.Add(panel9);
-            Controls.Add(panel8);
-            Controls.Add(panel7);
-            Controls.Add(panel6);
-            Controls.Add(panel5);
-            Controls.Add(panel4);
-            Controls.Add(panel3);
-            Controls.Add(panel2);
+            Controls.Add(pnl1200x675);
+            Controls.Add(pnl1280x720);
+            Controls.Add(pnl7680x4320);
+            Controls.Add(pnl3840x2160);
+            Controls.Add(pnl2560x1440);
+            Controls.Add(pnl1080x1920);
+            Controls.Add(pnl1920x1080);
+            Controls.Add(pnl1080x1080);
             Controls.Add(btnDefaultResize);
             Controls.Add(btnSaveResize);
             Controls.Add(txtbHeight);
@@ -470,24 +460,22 @@ namespace ProjectPictureManipulting
             Load += ResizeImage_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxResize).EndInit();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
-            panel8.ResumeLayout(false);
-            panel8.PerformLayout();
-            panel9.ResumeLayout(false);
-            panel9.PerformLayout();
-            panel10.ResumeLayout(false);
-            panel10.PerformLayout();
+            pnl1080x1080.ResumeLayout(false);
+            pnl1080x1080.PerformLayout();
+            pnl1920x1080.ResumeLayout(false);
+            pnl1920x1080.PerformLayout();
+            pnl1080x1920.ResumeLayout(false);
+            pnl1080x1920.PerformLayout();
+            pnl2560x1440.ResumeLayout(false);
+            pnl2560x1440.PerformLayout();
+            pnl3840x2160.ResumeLayout(false);
+            pnl3840x2160.PerformLayout();
+            pnl7680x4320.ResumeLayout(false);
+            pnl7680x4320.PerformLayout();
+            pnl1280x720.ResumeLayout(false);
+            pnl1280x720.PerformLayout();
+            pnl1200x675.ResumeLayout(false);
+            pnl1200x675.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -506,10 +494,10 @@ namespace ProjectPictureManipulting
         private TextBox txtbHeight;
         private Button btnSaveResize;
         private Button btnDefaultResize;
-        private Panel panel2;
-        private Panel panel3;
-        private Panel panel4;
-        private Panel panel5;
+        private Panel pnl1080x1080;
+        private Panel pnl1920x1080;
+        private Panel pnl1080x1920;
+        private Panel pnl2560x1440;
         private Label label1;
         private Label label2;
         private Label lblInstagramPost;
@@ -518,21 +506,18 @@ namespace ProjectPictureManipulting
         private Label label3;
         private Label label6;
         private Label label7;
-        private Panel panel6;
-        private Panel panel7;
+        private Panel pnl3840x2160;
+        private Panel pnl7680x4320;
         private Label label9;
         private Label label8;
         private Label label11;
         private Label label10;
-        private Panel panel8;
+        private Panel pnl1280x720;
         private Label label13;
         private Label label12;
-        private Panel panel9;
+        private Panel pnl1200x675;
         private Label label15;
         private Label label14;
-        private Panel panel10;
-        private Label label17;
-        private Label label16;
         private Button btnPreviewImage;
     }
 }
