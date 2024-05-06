@@ -52,6 +52,8 @@
             lblBrightness = new Label();
             btnDefaultBNC = new Button();
             btnReisize = new Button();
+            btnBlur = new Button();
+            txtbBlur = new TextBox();
             Header.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -155,9 +157,12 @@
             pictureBox1.Location = new Point(3, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(431, 293);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
+            pictureBox1.Paint += pictureBox1_Paint;
+            pictureBox1.MouseDown += pictureBox1_MouseDown;
+            pictureBox1.MouseMove += pictureBox1_MouseMove;
+            pictureBox1.MouseUp += pictureBox1_MouseUp;
             // 
             // label1
             // 
@@ -303,10 +308,31 @@
             btnReisize.UseVisualStyleBackColor = true;
             btnReisize.Click += btnReisize_Click;
             // 
-            // Form1
+            // btnBlur
+            // 
+            btnBlur.Location = new Point(555, 196);
+            btnBlur.Name = "btnBlur";
+            btnBlur.Size = new Size(77, 31);
+            btnBlur.TabIndex = 21;
+            btnBlur.Text = "Blur";
+            btnBlur.UseVisualStyleBackColor = true;
+            btnBlur.Click += btnBlur_Click;
+            // 
+            // txtbBlur
+            // 
+            txtbBlur.Location = new Point(557, 234);
+            txtbBlur.Name = "txtbBlur";
+            txtbBlur.Size = new Size(74, 23);
+            txtbBlur.TabIndex = 22;
+            txtbBlur.Text = "Blur: 1-20";
+            txtbBlur.TextAlign = HorizontalAlignment.Center;
+            // 
+            // Main
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(800, 450);
+            Controls.Add(txtbBlur);
+            Controls.Add(btnBlur);
             Controls.Add(btnReisize);
             Controls.Add(btnDefaultBNC);
             Controls.Add(lblBrightness);
@@ -326,7 +352,7 @@
             Controls.Add(Header);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Form1";
+            Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Header.ResumeLayout(false);
@@ -363,5 +389,7 @@
         private Label lblBrightness;
         private Button btnDefaultBNC;
         private Button btnReisize;
+        private Button btnBlur;
+        private TextBox txtbBlur;
     }
 }

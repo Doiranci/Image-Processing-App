@@ -5,12 +5,14 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
 using System.Drawing.Drawing2D;
+using AForge.Imaging.Filters;
 
 namespace ProjectPictureManipulting
 {
 
     public partial class Main : Form
     {
+        private Rectangle selectionRectangle;
         public void LoadImageOnMainForm(Image image)
         {
             pictureBox1.Image = image;
@@ -356,7 +358,6 @@ namespace ProjectPictureManipulting
             ResizeImage resize = new ResizeImage();
             resize.LoadImageOnResizeForm(pictureBox1.Image);
             resize.Show();
-            
         }
 
         public static void EmptyPictureBoxException()
@@ -364,7 +365,133 @@ namespace ProjectPictureManipulting
             MessageBox.Show("You need to insert picture first!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
-        
+        private void btnBlur_Click(object sender, EventArgs e)
+        {
+            if (selectionRectangle.Width <= 0 || selectionRectangle.Height <= 0)
+            {
+                MessageBox.Show("Please select a region to blur.");
+                return;
+            }
+            for (int i = 0; i < int.Parse(txtbBlur.Text); i++)
+            {
+                ApplyBlurToSelection();
+            }
+            
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Get the scale factors for converting PictureBox coordinates to image coordinates
+            float scaleX = (float)pictureBox1.Image.Width / pictureBox1.Width;
+            float scaleY = (float)pictureBox1.Image.Height / pictureBox1.Height;
+
+            // Calculate the starting point of the selection rectangle in image coordinates
+            int startX = (int)(e.X * scaleX);
+            int startY = (int)(e.Y * scaleY);
+
+            
+
+            selectionRectangle = new Rectangle(startX, startY, 0, 0);
+            pictureBox1.Refresh();
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+                return;
+
+            // Get the scale factors for converting PictureBox coordinates to image coordinates
+            float scaleX = (float)pictureBox1.Image.Width / pictureBox1.Width;
+            float scaleY = (float)pictureBox1.Image.Height / pictureBox1.Height;
+
+            // Calculate the end point of the selection rectangle in image coordinates
+            int endX = (int)(e.X * scaleX);
+            int endY = (int)(e.Y * scaleY);
+
+            
+
+            selectionRectangle.Width = endX - selectionRectangle.X;
+            selectionRectangle.Height = endY - selectionRectangle.Y;
+            pictureBox1.Refresh();
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            // Get the scale factors for converting PictureBox coordinates to image coordinates
+            float scaleX = (float)pictureBox1.Image.Width / pictureBox1.Width;
+            float scaleY = (float)pictureBox1.Image.Height / pictureBox1.Height;
+
+            // Calculate the end point of the selection rectangle in image coordinates
+            int endX = (int)(e.X * scaleX);
+            int endY = (int)(e.Y * scaleY);
+
+            MessageBox.Show($"Mouse Up - PictureBox: X: {e.X}, Y: {e.Y}, Image: X: {endX}, Y: {endY}");
+
+            selectionRectangle.Width = endX - selectionRectangle.X;
+            selectionRectangle.Height = endY - selectionRectangle.Y;
+            pictureBox1.Refresh();
+        }
+
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            if (selectionRectangle != null && selectionRectangle.Width > 0 && selectionRectangle.Height > 0)
+            {
+                // Get the scale factors for converting image coordinates to PictureBox coordinates
+                float scaleX = (float)pictureBox1.Width / pictureBox1.Image.Width;
+                float scaleY = (float)pictureBox1.Height / pictureBox1.Image.Height;
+
+                // Convert the selection rectangle from image coordinates to PictureBox coordinates
+                Rectangle scaledRectangle = new Rectangle(
+                    (int)(selectionRectangle.X * scaleX),
+                    (int)(selectionRectangle.Y * scaleY),
+                    (int)(selectionRectangle.Width * scaleX),
+                    (int)(selectionRectangle.Height * scaleY));
+
+                // Draw the selection rectangle on the PictureBox
+                using (Pen pen = new Pen(Color.Red))
+                {
+                    e.Graphics.DrawRectangle(pen, scaledRectangle);
+                }
+            }
+        }
+        private void ApplyBlurToSelection()
+        {
+            Bitmap imageToBlur = (Bitmap)pictureBox1.Image.Clone();
+
+            // Crop the selected region from the original image
+            Rectangle croppedRect = new Rectangle(
+                Math.Max(0, selectionRectangle.X),  // Ensure X is non-negative
+                Math.Max(0, selectionRectangle.Y),  // Ensure Y is non-negative
+                Math.Min(selectionRectangle.Width, imageToBlur.Width - selectionRectangle.X),  // Ensure width is within image bounds
+                Math.Min(selectionRectangle.Height, imageToBlur.Height - selectionRectangle.Y));  // Ensure height is within image bounds
+
+            if (croppedRect.Width <= 0 || croppedRect.Height <= 0)
+            {
+                MessageBox.Show("Selected region is outside the image bounds.");
+                return;
+            }
+
+            Bitmap selectedRegion = imageToBlur.Clone(croppedRect, imageToBlur.PixelFormat);
+
+            // Apply blur filter to the selected region
+            AForge.Imaging.Filters.GaussianBlur filter = new AForge.Imaging.Filters.GaussianBlur();
+            filter.Sigma = 20; // Adjust blur intensity here
+
+            Bitmap blurredRegion = filter.Apply(selectedRegion);
+            
+            
+
+            // Replace the selected region with the blurred region in the original image
+            using (Graphics g = Graphics.FromImage(imageToBlur))
+            {
+                g.DrawImage(blurredRegion, croppedRect.Location);
+            }
+
+            // Update PictureBox with the modified image
+            pictureBox1.Image = imageToBlur;
+            
+        }
     }
 
 }
