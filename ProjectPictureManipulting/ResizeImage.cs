@@ -37,14 +37,21 @@ namespace ProjectPictureManipulting
             txtbWidth.Text = width.ToString();
             txtbHeight.Text = height.ToString();
         }
-
+        private void formCloseMethod(string name)
+        {
+            Application.OpenForms
+           .OfType<Form>()
+           .Where(form => String.Equals(form.Name, name))
+           .ToList()
+           .ForEach(form => form.Close());
+        }
         private void btnSaveResize_Click(object sender, EventArgs e)
         {
             Main mainWindow = new();
             mainWindow.LoadImageOnMainForm(pictureBoxResize.Image);
             mainWindow.Show();
+            formCloseMethod("ResizeImage");
         }
-
         private void btnDefaultResize_Click(object sender, EventArgs e)
         {
             pictureBoxResize.Image = defaultImage;

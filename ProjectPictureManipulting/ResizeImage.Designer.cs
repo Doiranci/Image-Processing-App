@@ -135,6 +135,7 @@ namespace ProjectPictureManipulting
             // 
             btnSaveResize.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnSaveResize.Cursor = Cursors.Hand;
+            btnSaveResize.DialogResult = DialogResult.Ignore;
             btnSaveResize.Location = new Point(749, 606);
             btnSaveResize.Name = "btnSaveResize";
             btnSaveResize.Size = new Size(92, 36);
