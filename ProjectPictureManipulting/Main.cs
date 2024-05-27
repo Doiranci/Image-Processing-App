@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Drawing.Drawing2D;
 using AForge.Imaging.Filters;
+using System.Runtime.CompilerServices;
 
 namespace ProjectPictureManipulting
 {
@@ -15,7 +16,7 @@ namespace ProjectPictureManipulting
         private Rectangle selectionRectangle;
         public void LoadImageOnMainForm(Image image)
         {
-            pictureBox1.Image = image;
+            inputImage.Image = image;
         }
         public Bitmap AdjustBrightnessContrast(Image image, int contrastValue, int brightnessValue)
         {
@@ -173,7 +174,7 @@ namespace ProjectPictureManipulting
             if (open.ShowDialog() == DialogResult.OK)
             {
                 MemoryStream ms = new MemoryStream(File.ReadAllBytes(open.FileName));
-                pictureBox1.Image = new Bitmap(ms);
+                inputImage.Image = new Bitmap(ms);
                 originalImage = new Bitmap(ms);
             }
 
@@ -181,7 +182,7 @@ namespace ProjectPictureManipulting
 
         private void btnSaveImage_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image is null)
+            if (inputImage.Image is null)
             {
                 EmptyPictureBoxException();
 
@@ -203,7 +204,7 @@ namespace ProjectPictureManipulting
                             format = ImageFormat.Png;
                             break;
                     }
-                    pictureBox1.Image.Save(sfd.FileName, format);
+                    inputImage.Image.Save(sfd.FileName, format);
                 }
                 label1.Text = "Image saved successfully!!!!";
             }
@@ -214,22 +215,22 @@ namespace ProjectPictureManipulting
         Bitmap originalImage;
         private void btnGreyScale_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image is null)
+            if (inputImage.Image is null)
             {
                 EmptyPictureBoxException();
             }
             else
             {
-                Bitmap defaultImage = new(pictureBox1.Image);
+                Bitmap defaultImage = new(inputImage.Image);
 
                 if (!isGreyscaled)
                 {
-                    pictureBox1.Image = ConvertToGrayscale(defaultImage);
+                    inputImage.Image = ConvertToGrayscale(defaultImage);
                     isGreyscaled = true;
                 }
                 else
                 {
-                    pictureBox1.Image = originalImage;
+                    inputImage.Image = originalImage;
                     isGreyscaled = false;
                 }
             }
@@ -243,13 +244,13 @@ namespace ProjectPictureManipulting
 
         private void btnRotate_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image is null)
+            if (inputImage.Image is null)
             {
                 EmptyPictureBoxException();
             }
 
             // Get the current image from the PictureBox
-            Image currentImage = pictureBox1.Image;
+            Image currentImage = inputImage.Image;
 
             if (currentImage != null)
             {
@@ -257,16 +258,16 @@ namespace ProjectPictureManipulting
                 currentImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
 
                 // Update the PictureBox with the rotated image
-                pictureBox1.Image = currentImage;
+                inputImage.Image = currentImage;
 
                 // Force the PictureBox to redraw
-                pictureBox1.Invalidate();
+                inputImage.Invalidate();
             }
         }
 
         private void btnFlip_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image is null)
+            if (inputImage.Image is null)
             {
                 EmptyPictureBoxException();
             }
@@ -279,13 +280,13 @@ namespace ProjectPictureManipulting
 
         private void btnHorizontalFlip_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image is null)
+            if (inputImage.Image is null)
             {
                 EmptyPictureBoxException();
             }
 
             // Get the current image from the PictureBox
-            Image currentImage = pictureBox1.Image;
+            Image currentImage = inputImage.Image;
 
             if (currentImage != null)
             {
@@ -293,21 +294,21 @@ namespace ProjectPictureManipulting
                 currentImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
 
                 // Update the PictureBox with the flipped image
-                pictureBox1.Image = currentImage;
+                inputImage.Image = currentImage;
 
                 // Force the PictureBox to redraw
-                pictureBox1.Invalidate();
+                inputImage.Invalidate();
             }
         }
 
         private void btnVerticleFlip_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image is null)
+            if (inputImage.Image is null)
             {
                 EmptyPictureBoxException();
             }
             // Get the current image from the PictureBox
-            Image currentImage = pictureBox1.Image;
+            Image currentImage = inputImage.Image;
 
             if (currentImage != null)
             {
@@ -315,22 +316,22 @@ namespace ProjectPictureManipulting
                 currentImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
                 // Update the PictureBox with the flipped image
-                pictureBox1.Image = currentImage;
+                inputImage.Image = currentImage;
 
                 // Force the PictureBox to redraw
-                pictureBox1.Invalidate();
+                inputImage.Invalidate();
             }
         }
         Bitmap adjustBitmap;
         private void Slider_Scroll(object sender, EventArgs e)
         {
             //pictureBox1.Image?.Dispose();
-            pictureBox1.Image = AdjustBrightnessContrast(adjustBitmap, trbContrast.Value, trbBrightness.Value);
+            inputImage.Image = AdjustBrightnessContrast(adjustBitmap, trbContrast.Value, trbBrightness.Value);
         }
 
         private void btnBrightnessContrast_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image is null)
+            if (inputImage.Image is null)
             {
                 EmptyPictureBoxException();
             }
@@ -342,7 +343,7 @@ namespace ProjectPictureManipulting
                 lblContrast.Visible = !lblContrast.Visible;
                 btnDefaultBNC.Visible = !btnDefaultBNC.Visible;
 
-                adjustBitmap = new Bitmap(pictureBox1.Image);
+                adjustBitmap = new Bitmap(inputImage.Image);
             }
         }
 
@@ -350,13 +351,13 @@ namespace ProjectPictureManipulting
         {
             trbContrast.Value = 100;
             trbBrightness.Value = 0;
-            pictureBox1.Image = AdjustBrightnessContrast(adjustBitmap, trbContrast.Value, trbBrightness.Value);
+            inputImage.Image = AdjustBrightnessContrast(adjustBitmap, trbContrast.Value, trbBrightness.Value);
         }
 
         private void btnReisize_Click(object sender, EventArgs e)
         {
             ResizeImage resize = new ResizeImage();
-            resize.LoadImageOnResizeForm(pictureBox1.Image);
+            resize.LoadImageOnResizeForm(inputImage.Image);
             resize.Show();
         }
 
@@ -376,23 +377,23 @@ namespace ProjectPictureManipulting
             {
                 ApplyBlurToSelection();
             }
-            
+
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             // Get the scale factors for converting PictureBox coordinates to image coordinates
-            float scaleX = (float)pictureBox1.Image.Width / pictureBox1.Width;
-            float scaleY = (float)pictureBox1.Image.Height / pictureBox1.Height;
+            float scaleX = (float)inputImage.Image.Width / inputImage.Width;
+            float scaleY = (float)inputImage.Image.Height / inputImage.Height;
 
             // Calculate the starting point of the selection rectangle in image coordinates
             int startX = (int)(e.X * scaleX);
             int startY = (int)(e.Y * scaleY);
 
-            
+
 
             selectionRectangle = new Rectangle(startX, startY, 0, 0);
-            pictureBox1.Refresh();
+            inputImage.Refresh();
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -401,25 +402,25 @@ namespace ProjectPictureManipulting
                 return;
 
             // Get the scale factors for converting PictureBox coordinates to image coordinates
-            float scaleX = (float)pictureBox1.Image.Width / pictureBox1.Width;
-            float scaleY = (float)pictureBox1.Image.Height / pictureBox1.Height;
+            float scaleX = (float)inputImage.Image.Width / inputImage.Width;
+            float scaleY = (float)inputImage.Image.Height / inputImage.Height;
 
             // Calculate the end point of the selection rectangle in image coordinates
             int endX = (int)(e.X * scaleX);
             int endY = (int)(e.Y * scaleY);
 
-            
+
 
             selectionRectangle.Width = endX - selectionRectangle.X;
             selectionRectangle.Height = endY - selectionRectangle.Y;
-            pictureBox1.Refresh();
+            inputImage.Refresh();
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             // Get the scale factors for converting PictureBox coordinates to image coordinates
-            float scaleX = (float)pictureBox1.Image.Width / pictureBox1.Width;
-            float scaleY = (float)pictureBox1.Image.Height / pictureBox1.Height;
+            float scaleX = (float)inputImage.Image.Width / inputImage.Width;
+            float scaleY = (float)inputImage.Image.Height / inputImage.Height;
 
             // Calculate the end point of the selection rectangle in image coordinates
             int endX = (int)(e.X * scaleX);
@@ -429,7 +430,7 @@ namespace ProjectPictureManipulting
 
             selectionRectangle.Width = endX - selectionRectangle.X;
             selectionRectangle.Height = endY - selectionRectangle.Y;
-            pictureBox1.Refresh();
+            inputImage.Refresh();
         }
 
 
@@ -438,8 +439,8 @@ namespace ProjectPictureManipulting
             if (selectionRectangle != null && selectionRectangle.Width > 0 && selectionRectangle.Height > 0)
             {
                 // Get the scale factors for converting image coordinates to PictureBox coordinates
-                float scaleX = (float)pictureBox1.Width / pictureBox1.Image.Width;
-                float scaleY = (float)pictureBox1.Height / pictureBox1.Image.Height;
+                float scaleX = (float)inputImage.Width / inputImage.Image.Width;
+                float scaleY = (float)inputImage.Height / inputImage.Image.Height;
 
                 // Convert the selection rectangle from image coordinates to PictureBox coordinates
                 Rectangle scaledRectangle = new Rectangle(
@@ -457,7 +458,7 @@ namespace ProjectPictureManipulting
         }
         private void ApplyBlurToSelection()
         {
-            Bitmap imageToBlur = (Bitmap)pictureBox1.Image.Clone();
+            Bitmap imageToBlur = (Bitmap)inputImage.Image.Clone();
 
             // Crop the selected region from the original image
             Rectangle croppedRect = new Rectangle(
@@ -479,8 +480,8 @@ namespace ProjectPictureManipulting
             filter.Sigma = 20; // Adjust blur intensity here
 
             Bitmap blurredRegion = filter.Apply(selectedRegion);
-            
-            
+
+
 
             // Replace the selected region with the blurred region in the original image
             using (Graphics g = Graphics.FromImage(imageToBlur))
@@ -489,8 +490,96 @@ namespace ProjectPictureManipulting
             }
 
             // Update PictureBox with the modified image
-            pictureBox1.Image = imageToBlur;
-            
+            inputImage.Image = imageToBlur;
+
+
+
+        }
+        enum filterNames
+        {
+            AquaBlue = 0,
+            Coral = 1,
+            DarkViolet = 2,
+            Default = 3
+        }
+
+        public static Image filterImage(Image inputImage, Color color)
+        {
+            Bitmap outputImage = new Bitmap(inputImage);
+
+            Graphics g = Graphics.FromImage(outputImage);
+            g.DrawImage(inputImage, 0, 0);
+
+
+
+            g.FillRectangle(new SolidBrush(Color.FromArgb(100, color)), 0, 0, inputImage.Width, inputImage.Height);
+
+            return outputImage;
+
+        }
+        bool isFiltered = false;
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isFiltered)
+            {
+                originalImage = new Bitmap(inputImage.Image);
+                int chosenColor = comboBox1.SelectedIndex;
+                Color color = Color.Transparent;
+
+
+                switch (chosenColor)
+                {
+                    case (int)filterNames.AquaBlue:
+                        color = Color.Aquamarine;
+                        inputImage.Image = filterImage(originalImage, color);
+                        break;
+                    case (int)filterNames.Coral:
+                        color = Color.Coral;
+                        inputImage.Image = filterImage(originalImage, color);
+                        break;
+                    case (int)filterNames.DarkViolet:
+                        color = Color.DarkViolet;
+                        inputImage.Image = filterImage(originalImage, color);
+                        break;
+                    case (int)filterNames.Default:
+                        inputImage.Image = originalImage;
+                        break;
+                    default:
+                        break;
+                }
+
+                isFiltered = true;
+            }
+            else
+            {
+                int chosenColor = comboBox1.SelectedIndex;
+                Color color = Color.Transparent;
+
+                switch (chosenColor)
+                {
+                    case (int)filterNames.AquaBlue:
+                        color = Color.Aquamarine;
+                        inputImage.Image = filterImage(originalImage, color);
+                        break;
+                    case (int)filterNames.Coral:
+                        color = Color.Coral;
+                        inputImage.Image = filterImage(originalImage, color);
+                        break;
+                    case (int)filterNames.DarkViolet:
+                        color = Color.DarkViolet;
+                        inputImage.Image = filterImage(originalImage, color);
+                        break;
+                    case (int)filterNames.Default:
+                        inputImage.Image = originalImage;
+                        break;
+                    default:
+                        break;
+                }
+
+                isFiltered = true;
+            }
+
+
         }
     }
 

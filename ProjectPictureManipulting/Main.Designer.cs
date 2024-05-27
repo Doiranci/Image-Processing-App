@@ -36,7 +36,7 @@
             btnMinimize = new Button();
             btnUploadImage = new Button();
             btnSaveImage = new Button();
-            pictureBox1 = new PictureBox();
+            inputImage = new PictureBox();
             label1 = new Label();
             btnGreyScale = new Button();
             saveFileDialog1 = new SaveFileDialog();
@@ -54,9 +54,10 @@
             btnReisize = new Button();
             btnBlur = new Button();
             txtbBlur = new TextBox();
+            comboBox1 = new ComboBox();
             Header.SuspendLayout();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)inputImage).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trbContrast).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trbBrightness).BeginInit();
@@ -151,18 +152,19 @@
             btnSaveImage.UseVisualStyleBackColor = true;
             btnSaveImage.Click += btnSaveImage_Click;
             // 
-            // pictureBox1
+            // inputImage
             // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox1.Location = new Point(3, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(431, 293);
-            pictureBox1.TabIndex = 5;
-            pictureBox1.TabStop = false;
-            pictureBox1.Paint += pictureBox1_Paint;
-            pictureBox1.MouseDown += pictureBox1_MouseDown;
-            pictureBox1.MouseMove += pictureBox1_MouseMove;
-            pictureBox1.MouseUp += pictureBox1_MouseUp;
+            inputImage.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            inputImage.Location = new Point(3, 3);
+            inputImage.Name = "inputImage";
+            inputImage.Size = new Size(431, 293);
+            inputImage.SizeMode = PictureBoxSizeMode.Zoom;
+            inputImage.TabIndex = 5;
+            inputImage.TabStop = false;
+            inputImage.Paint += pictureBox1_Paint;
+            inputImage.MouseDown += pictureBox1_MouseDown;
+            inputImage.MouseMove += pictureBox1_MouseMove;
+            inputImage.MouseUp += pictureBox1_MouseUp;
             // 
             // label1
             // 
@@ -186,7 +188,7 @@
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = SystemColors.ButtonShadow;
-            panel2.Controls.Add(pictureBox1);
+            panel2.Controls.Add(inputImage);
             panel2.Location = new Point(12, 139);
             panel2.Name = "panel2";
             panel2.Size = new Size(437, 299);
@@ -327,10 +329,21 @@
             txtbBlur.Text = "Blur: 1-20";
             txtbBlur.TextAlign = HorizontalAlignment.Center;
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "AquaBlue", "Coral", "DarkViolet", "Default" });
+            comboBox1.Location = new Point(659, 196);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(129, 23);
+            comboBox1.TabIndex = 23;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
             // Main
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(800, 450);
+            Controls.Add(comboBox1);
             Controls.Add(txtbBlur);
             Controls.Add(btnBlur);
             Controls.Add(btnReisize);
@@ -357,7 +370,7 @@
             Text = "Form1";
             Header.ResumeLayout(false);
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)inputImage).EndInit();
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)trbContrast).EndInit();
             ((System.ComponentModel.ISupportInitialize)trbBrightness).EndInit();
@@ -373,7 +386,7 @@
         private Button btnMaximize;
         private Button btnUploadImage;
         private Button btnSaveImage;
-        private PictureBox pictureBox1;
+        private PictureBox inputImage;
         private Label label1;
         private Button btnGreyScale;
         private SaveFileDialog saveFileDialog1;
@@ -391,5 +404,6 @@
         private Button btnReisize;
         private Button btnBlur;
         private TextBox txtbBlur;
+        private ComboBox comboBox1;
     }
 }
