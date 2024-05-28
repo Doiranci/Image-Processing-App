@@ -158,7 +158,7 @@
             inputImage.Location = new Point(3, 3);
             inputImage.Name = "inputImage";
             inputImage.Size = new Size(431, 293);
-            inputImage.SizeMode = PictureBoxSizeMode.Zoom;
+            inputImage.SizeMode = PictureBoxSizeMode.StretchImage;
             inputImage.TabIndex = 5;
             inputImage.TabStop = false;
             inputImage.Paint += pictureBox1_Paint;

@@ -57,7 +57,7 @@ namespace ProjectPictureManipulting
             pictureBoxResize.Image = defaultImage;
         }
 
-        private Bitmap ResizeNow(int target_width, int target_height)
+        public Bitmap ResizeNow(int target_width, int target_height)
         {
             if (target_width < 1)
             {

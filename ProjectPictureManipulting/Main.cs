@@ -169,14 +169,17 @@ namespace ProjectPictureManipulting
 
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
+            
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = "Image Files(*.jpg; *.jpeg;  *.gif; *.bmp;)|*.jpg; *.jpeg;  *.gif; *.bmp;";
             if (open.ShowDialog() == DialogResult.OK)
             {
                 MemoryStream ms = new MemoryStream(File.ReadAllBytes(open.FileName));
                 inputImage.Image = new Bitmap(ms);
+                
                 originalImage = new Bitmap(ms);
             }
+            MessageBox.Show($"Height: {inputImage.Image.Height}, Width: {inputImage.Image.Width}, Aspect ratio of Image: {(double)inputImage.Image.Width / (double)inputImage.Image.Height}");
 
         }
 
@@ -427,6 +430,8 @@ namespace ProjectPictureManipulting
             int endY = (int)(e.Y * scaleY);
 
             MessageBox.Show($"Mouse Up - PictureBox: X: {e.X}, Y: {e.Y}, Image: X: {endX}, Y: {endY}");
+            MessageBox.Show($"Mouse Up scaleX: {scaleX}, scaleY: {scaleY}");
+
 
             selectionRectangle.Width = endX - selectionRectangle.X;
             selectionRectangle.Height = endY - selectionRectangle.Y;
