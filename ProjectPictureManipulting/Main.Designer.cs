@@ -335,6 +335,7 @@
             txtbBlur.TabIndex = 22;
             txtbBlur.Text = "Blur: 1-20";
             txtbBlur.TextAlign = HorizontalAlignment.Center;
+            txtbBlur.TextChanged += txtbBlur_TextChanged;
             // 
             // comboBox1
             // 

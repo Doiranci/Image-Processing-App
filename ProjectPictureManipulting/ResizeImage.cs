@@ -49,13 +49,13 @@ namespace ProjectPictureManipulting
         }
 
         private void ResizeImage_Load(object sender, EventArgs e)
-        {
-            target_image = pictureBoxResize.Image;
-            defaultImage = pictureBoxResize.Image;
-            width = target_image.Width;
-            height = target_image.Height;
-            txtbWidth.Text = width.ToString();
-            txtbHeight.Text = height.ToString();
+        {          
+                target_image = pictureBoxResize.Image;
+                defaultImage = pictureBoxResize.Image;
+                width = target_image.Width;
+                height = target_image.Height;
+                txtbWidth.Text = width.ToString();
+                txtbHeight.Text = height.ToString();       
         }
         private void formCloseMethod(string name)
         {

@@ -138,7 +138,7 @@ namespace ProjectPictureManipulting
         private void btnMinimize_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
-            
+
         }
 
         private void btnMaximize_Click(object sender, EventArgs e)
@@ -361,44 +361,82 @@ namespace ProjectPictureManipulting
 
         private void btnReisize_Click(object sender, EventArgs e)
         {
-            ResizeImage resize = new ResizeImage();
-            resize.LoadImageOnResizeForm(inputImage.Image);
-            resize.Show();
+           
+            if (inputImage.Image is null)
+            {
+                EmptyPictureBoxException();
+            }
+            else
+            {
+                ResizeImage resize = new ResizeImage();
+                resize.LoadImageOnResizeForm(inputImage.Image);
+                resize.Show();
+            }
         }
 
         public static void EmptyPictureBoxException()
         {
-            MessageBox.Show("You need to insert picture first!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show("You need to insert picture first!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void btnBlur_Click(object sender, EventArgs e)
         {
-            if (selectionRectangle.Width <= 0 || selectionRectangle.Height <= 0)
+            if (inputImage.Image is null)
             {
-                MessageBox.Show("Please select a region to blur.");
-                return;
+                EmptyPictureBoxException();
             }
-            for (int i = 0; i < int.Parse(txtbBlur.Text); i++)
+            else
             {
-                ApplyBlurToSelection();
+                if (selectionRectangle.Width <= 0 || selectionRectangle.Height <= 0)
+                {
+                    MessageBox.Show("Please select a region to blur.", "Not valid operation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (int.TryParse(txtbBlur.Text, out int blurScale))
+                {
+                    if (blurScale < 0)
+                    {
+                        blurScale = 0;
+                    }
+                    else if (blurScale > 20)
+                    {
+                       blurScale = 20;
+                    }
+                    txtbBlur.Text = blurScale.ToString();
+                    for (int i = 0; i < blurScale; i++)
+                    {
+                        ApplyBlurToSelection();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select blur scale in the text box wich is from 1 to 20", "Not valid operation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Get the scale factors for converting PictureBox coordinates to image coordinates
-            float scaleX = (float)inputImage.Image.Width / inputImage.Width;
-            float scaleY = (float)inputImage.Image.Height / inputImage.Height;
+           
+            if (inputImage.Image is null)
+            {
+                EmptyPictureBoxException();
+            }
+            else
+            {  
+                // Get the scale factors for converting PictureBox coordinates to image coordinates
+                float scaleX = (float)inputImage.Image.Width / inputImage.Width;
+                float scaleY = (float)inputImage.Image.Height / inputImage.Height;
 
-            // Calculate the starting point of the selection rectangle in image coordinates
-            int startX = (int)(e.X * scaleX);
-            int startY = (int)(e.Y * scaleY);
+                // Calculate the starting point of the selection rectangle in image coordinates
+                int startX = (int)(e.X * scaleX);
+                int startY = (int)(e.Y * scaleY);
 
 
-
-            selectionRectangle = new Rectangle(startX, startY, 0, 0);
-            inputImage.Refresh();
+                selectionRectangle = new Rectangle(startX, startY, 0, 0);
+                inputImage.Refresh();
+            }
+          
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -443,6 +481,7 @@ namespace ProjectPictureManipulting
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+
             if (selectionRectangle != null && selectionRectangle.Width > 0 && selectionRectangle.Height > 0)
             {
                 // Get the scale factors for converting image coordinates to PictureBox coordinates
@@ -476,7 +515,7 @@ namespace ProjectPictureManipulting
 
             if (croppedRect.Width <= 0 || croppedRect.Height <= 0)
             {
-                MessageBox.Show("Selected region is outside the image bounds.");
+                MessageBox.Show("Selected region is outside the image bounds.", "Not valid operation", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -527,71 +566,82 @@ namespace ProjectPictureManipulting
         bool isFiltered = false;
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!isFiltered)
+           
+            if (inputImage.Image is null)
             {
-                originalImage = new Bitmap(inputImage.Image);
-                int chosenColor = comboBox1.SelectedIndex;
-                Color color = Color.Transparent;
-
-
-                switch (chosenColor)
-                {
-                    case (int)filterNames.AquaBlue:
-                        color = Color.Aquamarine;
-                        inputImage.Image = filterImage(originalImage, color);
-                        break;
-                    case (int)filterNames.Coral:
-                        color = Color.Coral;
-                        inputImage.Image = filterImage(originalImage, color);
-                        break;
-                    case (int)filterNames.DarkViolet:
-                        color = Color.DarkViolet;
-                        inputImage.Image = filterImage(originalImage, color);
-                        break;
-                    case (int)filterNames.Default:
-                        inputImage.Image = originalImage;
-                        break;
-                    default:
-                        break;
-                }
-
-                isFiltered = true;
+                EmptyPictureBoxException();
             }
             else
             {
-                int chosenColor = comboBox1.SelectedIndex;
-                Color color = Color.Transparent;
-
-                switch (chosenColor)
+                if (!isFiltered)
                 {
-                    case (int)filterNames.AquaBlue:
-                        color = Color.Aquamarine;
-                        inputImage.Image = filterImage(originalImage, color);
-                        break;
-                    case (int)filterNames.Coral:
-                        color = Color.Coral;
-                        inputImage.Image = filterImage(originalImage, color);
-                        break;
-                    case (int)filterNames.DarkViolet:
-                        color = Color.DarkViolet;
-                        inputImage.Image = filterImage(originalImage, color);
-                        break;
-                    case (int)filterNames.Default:
-                        inputImage.Image = originalImage;
-                        break;
-                    default:
-                        break;
+                    originalImage = new Bitmap(inputImage.Image);
+                    int chosenColor = comboBox1.SelectedIndex;
+                    Color color = Color.Transparent;
+
+
+                    switch (chosenColor)
+                    {
+                        case (int)filterNames.AquaBlue:
+                            color = Color.Aquamarine;
+                            inputImage.Image = filterImage(originalImage, color);
+                            break;
+                        case (int)filterNames.Coral:
+                            color = Color.Coral;
+                            inputImage.Image = filterImage(originalImage, color);
+                            break;
+                        case (int)filterNames.DarkViolet:
+                            color = Color.DarkViolet;
+                            inputImage.Image = filterImage(originalImage, color);
+                            break;
+                        case (int)filterNames.Default:
+                            inputImage.Image = originalImage;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    isFiltered = true;
                 }
+                else
+                {
+                    int chosenColor = comboBox1.SelectedIndex;
+                    Color color = Color.Transparent;
 
-                isFiltered = true;
+                    switch (chosenColor)
+                    {
+                        case (int)filterNames.AquaBlue:
+                            color = Color.Aquamarine;
+                            inputImage.Image = filterImage(originalImage, color);
+                            break;
+                        case (int)filterNames.Coral:
+                            color = Color.Coral;
+                            inputImage.Image = filterImage(originalImage, color);
+                            break;
+                        case (int)filterNames.DarkViolet:
+                            color = Color.DarkViolet;
+                            inputImage.Image = filterImage(originalImage, color);
+                            break;
+                        case (int)filterNames.Default:
+                            inputImage.Image = originalImage;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    isFiltered = true;
+                }
             }
-
-
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-        
+
+        }
+
+        private void txtbBlur_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
