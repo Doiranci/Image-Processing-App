@@ -29,6 +29,7 @@ namespace ProjectPictureManipulting
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResizeImage));
             panel1 = new Panel();
             pictureBoxResize = new PictureBox();
             lblHeight = new Label();
@@ -62,6 +63,11 @@ namespace ProjectPictureManipulting
             label15 = new Label();
             label14 = new Label();
             btnPreviewImage = new Button();
+            Header = new Panel();
+            panel2 = new Panel();
+            btnClose = new Button();
+            btnMaximize = new Button();
+            btnMinimize = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxResize).BeginInit();
             pnl1080x1080.SuspendLayout();
@@ -72,6 +78,8 @@ namespace ProjectPictureManipulting
             pnl7680x4320.SuspendLayout();
             pnl1280x720.SuspendLayout();
             pnl1200x675.SuspendLayout();
+            Header.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -80,7 +88,7 @@ namespace ProjectPictureManipulting
             panel1.AutoScroll = true;
             panel1.BackColor = SystemColors.AppWorkspace;
             panel1.Controls.Add(pictureBoxResize);
-            panel1.Location = new Point(7, 5);
+            panel1.Location = new Point(16, 78);
             panel1.Name = "panel1";
             panel1.Size = new Size(460, 383);
             panel1.TabIndex = 0;
@@ -99,7 +107,7 @@ namespace ProjectPictureManipulting
             // 
             lblHeight.Anchor = AnchorStyles.Right;
             lblHeight.AutoSize = true;
-            lblHeight.Location = new Point(487, 165);
+            lblHeight.Location = new Point(496, 238);
             lblHeight.Name = "lblHeight";
             lblHeight.Size = new Size(43, 15);
             lblHeight.TabIndex = 3;
@@ -109,7 +117,7 @@ namespace ProjectPictureManipulting
             // 
             lblWidth.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblWidth.AutoSize = true;
-            lblWidth.Location = new Point(214, 400);
+            lblWidth.Location = new Point(223, 473);
             lblWidth.Name = "lblWidth";
             lblWidth.Size = new Size(39, 15);
             lblWidth.TabIndex = 4;
@@ -118,7 +126,7 @@ namespace ProjectPictureManipulting
             // txtbWidth
             // 
             txtbWidth.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            txtbWidth.Location = new Point(197, 418);
+            txtbWidth.Location = new Point(206, 491);
             txtbWidth.Name = "txtbWidth";
             txtbWidth.Size = new Size(75, 23);
             txtbWidth.TabIndex = 5;
@@ -126,7 +134,7 @@ namespace ProjectPictureManipulting
             // txtbHeight
             // 
             txtbHeight.Anchor = AnchorStyles.Right;
-            txtbHeight.Location = new Point(473, 183);
+            txtbHeight.Location = new Point(482, 256);
             txtbHeight.Name = "txtbHeight";
             txtbHeight.Size = new Size(75, 23);
             txtbHeight.TabIndex = 6;
@@ -136,7 +144,7 @@ namespace ProjectPictureManipulting
             btnSaveResize.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnSaveResize.Cursor = Cursors.Hand;
             btnSaveResize.DialogResult = DialogResult.Ignore;
-            btnSaveResize.Location = new Point(749, 606);
+            btnSaveResize.Location = new Point(189, 558);
             btnSaveResize.Name = "btnSaveResize";
             btnSaveResize.Size = new Size(92, 36);
             btnSaveResize.TabIndex = 7;
@@ -148,7 +156,7 @@ namespace ProjectPictureManipulting
             // 
             btnDefaultResize.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnDefaultResize.Cursor = Cursors.Hand;
-            btnDefaultResize.Location = new Point(7, 409);
+            btnDefaultResize.Location = new Point(16, 482);
             btnDefaultResize.Name = "btnDefaultResize";
             btnDefaultResize.Size = new Size(92, 30);
             btnDefaultResize.TabIndex = 8;
@@ -162,7 +170,7 @@ namespace ProjectPictureManipulting
             pnl1080x1080.Controls.Add(label4);
             pnl1080x1080.Controls.Add(lblInstagramPost);
             pnl1080x1080.Cursor = Cursors.Hand;
-            pnl1080x1080.Location = new Point(573, 21);
+            pnl1080x1080.Location = new Point(576, 59);
             pnl1080x1080.Name = "pnl1080x1080";
             pnl1080x1080.Size = new Size(91, 88);
             pnl1080x1080.TabIndex = 9;
@@ -197,7 +205,7 @@ namespace ProjectPictureManipulting
             pnl1920x1080.Controls.Add(label5);
             pnl1920x1080.Controls.Add(label1);
             pnl1920x1080.Cursor = Cursors.Hand;
-            pnl1920x1080.Location = new Point(695, 136);
+            pnl1920x1080.Location = new Point(698, 174);
             pnl1920x1080.Name = "pnl1920x1080";
             pnl1920x1080.Size = new Size(146, 88);
             pnl1920x1080.TabIndex = 11;
@@ -231,7 +239,7 @@ namespace ProjectPictureManipulting
             pnl1080x1920.Controls.Add(label3);
             pnl1080x1920.Controls.Add(label2);
             pnl1080x1920.Cursor = Cursors.Hand;
-            pnl1080x1920.Location = new Point(573, 136);
+            pnl1080x1920.Location = new Point(576, 174);
             pnl1080x1920.Name = "pnl1080x1920";
             pnl1080x1920.Size = new Size(91, 150);
             pnl1080x1920.TabIndex = 13;
@@ -266,7 +274,7 @@ namespace ProjectPictureManipulting
             pnl2560x1440.Controls.Add(label7);
             pnl2560x1440.Controls.Add(label6);
             pnl2560x1440.Cursor = Cursors.Hand;
-            pnl2560x1440.Location = new Point(695, 253);
+            pnl2560x1440.Location = new Point(698, 291);
             pnl2560x1440.Name = "pnl2560x1440";
             pnl2560x1440.Size = new Size(147, 88);
             pnl2560x1440.TabIndex = 15;
@@ -299,7 +307,7 @@ namespace ProjectPictureManipulting
             pnl3840x2160.Controls.Add(label9);
             pnl3840x2160.Controls.Add(label8);
             pnl3840x2160.Cursor = Cursors.Hand;
-            pnl3840x2160.Location = new Point(695, 371);
+            pnl3840x2160.Location = new Point(698, 409);
             pnl3840x2160.Name = "pnl3840x2160";
             pnl3840x2160.Size = new Size(147, 88);
             pnl3840x2160.TabIndex = 16;
@@ -331,7 +339,7 @@ namespace ProjectPictureManipulting
             pnl7680x4320.Controls.Add(label11);
             pnl7680x4320.Controls.Add(label10);
             pnl7680x4320.Cursor = Cursors.Hand;
-            pnl7680x4320.Location = new Point(695, 487);
+            pnl7680x4320.Location = new Point(698, 525);
             pnl7680x4320.Name = "pnl7680x4320";
             pnl7680x4320.Size = new Size(147, 88);
             pnl7680x4320.TabIndex = 17;
@@ -364,7 +372,7 @@ namespace ProjectPictureManipulting
             pnl1280x720.Controls.Add(label13);
             pnl1280x720.Controls.Add(label12);
             pnl1280x720.Cursor = Cursors.Hand;
-            pnl1280x720.Location = new Point(695, 21);
+            pnl1280x720.Location = new Point(698, 59);
             pnl1280x720.Name = "pnl1280x720";
             pnl1280x720.Size = new Size(146, 88);
             pnl1280x720.TabIndex = 18;
@@ -396,7 +404,7 @@ namespace ProjectPictureManipulting
             pnl1200x675.Controls.Add(label15);
             pnl1200x675.Controls.Add(label14);
             pnl1200x675.Cursor = Cursors.Hand;
-            pnl1200x675.Location = new Point(547, 316);
+            pnl1200x675.Location = new Point(550, 354);
             pnl1200x675.Name = "pnl1200x675";
             pnl1200x675.Size = new Size(117, 85);
             pnl1200x675.TabIndex = 19;
@@ -427,7 +435,7 @@ namespace ProjectPictureManipulting
             // btnPreviewImage
             // 
             btnPreviewImage.Cursor = Cursors.Hand;
-            btnPreviewImage.Location = new Point(351, 411);
+            btnPreviewImage.Location = new Point(360, 484);
             btnPreviewImage.Name = "btnPreviewImage";
             btnPreviewImage.Size = new Size(116, 30);
             btnPreviewImage.TabIndex = 22;
@@ -435,11 +443,87 @@ namespace ProjectPictureManipulting
             btnPreviewImage.UseVisualStyleBackColor = true;
             btnPreviewImage.Click += btnPreviewImage_Click;
             // 
+            // Header
+            // 
+            Header.BackColor = Color.FromArgb(7, 87, 119);
+            Header.Controls.Add(panel2);
+            Header.Dock = DockStyle.Top;
+            Header.Location = new Point(0, 0);
+            Header.Name = "Header";
+            Header.Size = new Size(876, 37);
+            Header.TabIndex = 23;
+            Header.MouseDown += OnMouseDown;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.FromArgb(11, 130, 187);
+            panel2.Controls.Add(btnClose);
+            panel2.Controls.Add(btnMaximize);
+            panel2.Controls.Add(btnMinimize);
+            panel2.Dock = DockStyle.Right;
+            panel2.Location = new Point(740, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(136, 37);
+            panel2.TabIndex = 0;
+            // 
+            // btnClose
+            // 
+            btnClose.BackColor = Color.Transparent;
+            btnClose.Cursor = Cursors.Hand;
+            btnClose.FlatAppearance.BorderSize = 0;
+            btnClose.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnClose.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnClose.FlatStyle = FlatStyle.Flat;
+            btnClose.Image = (Image)resources.GetObject("btnClose.Image");
+            btnClose.Location = new Point(100, 8);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(24, 23);
+            btnClose.TabIndex = 2;
+            btnClose.Text = "\r\n";
+            btnClose.UseVisualStyleBackColor = false;
+            btnClose.Click += btnClose_Click;
+            // 
+            // btnMaximize
+            // 
+            btnMaximize.BackColor = Color.Transparent;
+            btnMaximize.Cursor = Cursors.Hand;
+            btnMaximize.FlatAppearance.BorderSize = 0;
+            btnMaximize.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnMaximize.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnMaximize.FlatStyle = FlatStyle.Flat;
+            btnMaximize.Image = (Image)resources.GetObject("btnMaximize.Image");
+            btnMaximize.Location = new Point(60, 8);
+            btnMaximize.Name = "btnMaximize";
+            btnMaximize.Size = new Size(23, 23);
+            btnMaximize.TabIndex = 1;
+            btnMaximize.Text = "\r\n";
+            btnMaximize.UseVisualStyleBackColor = false;
+            btnMaximize.Click += btnMaximize_Click;
+            // 
+            // btnMinimize
+            // 
+            btnMinimize.BackColor = Color.Transparent;
+            btnMinimize.Cursor = Cursors.Hand;
+            btnMinimize.FlatAppearance.BorderSize = 0;
+            btnMinimize.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnMinimize.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnMinimize.FlatStyle = FlatStyle.Flat;
+            btnMinimize.Image = (Image)resources.GetObject("btnMinimize.Image");
+            btnMinimize.Location = new Point(18, 8);
+            btnMinimize.Name = "btnMinimize";
+            btnMinimize.Size = new Size(24, 23);
+            btnMinimize.TabIndex = 0;
+            btnMinimize.Text = "\r\n";
+            btnMinimize.UseVisualStyleBackColor = false;
+            btnMinimize.Click += btnMinimize_Click;
+            // 
             // ResizeImage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(52, 52, 52);
             ClientSize = new Size(876, 654);
+            Controls.Add(Header);
             Controls.Add(btnPreviewImage);
             Controls.Add(pnl1200x675);
             Controls.Add(pnl1280x720);
@@ -456,6 +540,7 @@ namespace ProjectPictureManipulting
             Controls.Add(lblWidth);
             Controls.Add(lblHeight);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "ResizeImage";
             Text = "Resize Image";
             Load += ResizeImage_Load;
@@ -477,6 +562,8 @@ namespace ProjectPictureManipulting
             pnl1280x720.PerformLayout();
             pnl1200x675.ResumeLayout(false);
             pnl1200x675.PerformLayout();
+            Header.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -520,5 +607,10 @@ namespace ProjectPictureManipulting
         private Label label15;
         private Label label14;
         private Button btnPreviewImage;
+        private Panel Header;
+        private Panel panel2;
+        private Button btnClose;
+        private Button btnMaximize;
+        private Button btnMinimize;
     }
 }

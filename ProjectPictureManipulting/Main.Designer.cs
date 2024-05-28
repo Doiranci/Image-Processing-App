@@ -65,7 +65,7 @@
             // 
             // Header
             // 
-            Header.BackColor = SystemColors.ActiveBorder;
+            Header.BackColor = Color.FromArgb(7, 87, 119);
             Header.Controls.Add(panel1);
             Header.Dock = DockStyle.Top;
             Header.Location = new Point(0, 0);
@@ -76,7 +76,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = SystemColors.ButtonShadow;
+            panel1.BackColor = Color.FromArgb(10, 130, 190);
             panel1.Controls.Add(btnClose);
             panel1.Controls.Add(btnMaximize);
             panel1.Controls.Add(btnMinimize);
@@ -92,6 +92,8 @@
             btnClose.BackColor = Color.Transparent;
             btnClose.Cursor = Cursors.Hand;
             btnClose.FlatAppearance.BorderSize = 0;
+            btnClose.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnClose.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Image = (Image)resources.GetObject("btnClose.Image");
             btnClose.Location = new Point(100, 8);
@@ -107,6 +109,8 @@
             btnMaximize.BackColor = Color.Transparent;
             btnMaximize.Cursor = Cursors.Hand;
             btnMaximize.FlatAppearance.BorderSize = 0;
+            btnMaximize.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnMaximize.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnMaximize.FlatStyle = FlatStyle.Flat;
             btnMaximize.Image = (Image)resources.GetObject("btnMaximize.Image");
             btnMaximize.Location = new Point(60, 8);
@@ -122,6 +126,8 @@
             btnMinimize.BackColor = Color.Transparent;
             btnMinimize.Cursor = Cursors.Hand;
             btnMinimize.FlatAppearance.BorderSize = 0;
+            btnMinimize.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnMinimize.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnMinimize.FlatStyle = FlatStyle.Flat;
             btnMinimize.Image = (Image)resources.GetObject("btnMinimize.Image");
             btnMinimize.Location = new Point(18, 8);
@@ -134,9 +140,9 @@
             // 
             // btnUploadImage
             // 
-            btnUploadImage.Location = new Point(15, 45);
+            btnUploadImage.Location = new Point(497, 43);
             btnUploadImage.Name = "btnUploadImage";
-            btnUploadImage.Size = new Size(139, 32);
+            btnUploadImage.Size = new Size(99, 31);
             btnUploadImage.TabIndex = 3;
             btnUploadImage.Text = "Upload Image";
             btnUploadImage.UseVisualStyleBackColor = true;
@@ -144,7 +150,7 @@
             // 
             // btnSaveImage
             // 
-            btnSaveImage.Location = new Point(160, 47);
+            btnSaveImage.Location = new Point(415, 45);
             btnSaveImage.Name = "btnSaveImage";
             btnSaveImage.Size = new Size(63, 29);
             btnSaveImage.TabIndex = 4;
@@ -155,9 +161,9 @@
             // inputImage
             // 
             inputImage.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            inputImage.Location = new Point(3, 3);
+            inputImage.Location = new Point(3, 5);
             inputImage.Name = "inputImage";
-            inputImage.Size = new Size(431, 293);
+            inputImage.Size = new Size(390, 273);
             inputImage.SizeMode = PictureBoxSizeMode.StretchImage;
             inputImage.TabIndex = 5;
             inputImage.TabStop = false;
@@ -176,7 +182,7 @@
             // 
             // btnGreyScale
             // 
-            btnGreyScale.Location = new Point(229, 45);
+            btnGreyScale.Location = new Point(311, 44);
             btnGreyScale.Name = "btnGreyScale";
             btnGreyScale.Size = new Size(98, 30);
             btnGreyScale.TabIndex = 8;
@@ -186,18 +192,19 @@
             // 
             // panel2
             // 
+            panel2.AllowDrop = true;
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = SystemColors.ButtonShadow;
             panel2.Controls.Add(inputImage);
-            panel2.Location = new Point(12, 139);
+            panel2.Location = new Point(336, 84);
             panel2.Name = "panel2";
-            panel2.Size = new Size(437, 299);
+            panel2.Size = new Size(452, 325);
             panel2.TabIndex = 9;
             panel2.Paint += panel2_Paint;
             // 
             // btnRotate
             // 
-            btnRotate.Location = new Point(15, 83);
+            btnRotate.Location = new Point(690, 46);
             btnRotate.Name = "btnRotate";
             btnRotate.Size = new Size(98, 24);
             btnRotate.TabIndex = 10;
@@ -207,7 +214,7 @@
             // 
             // btnFlip
             // 
-            btnFlip.Location = new Point(160, 84);
+            btnFlip.Location = new Point(602, 47);
             btnFlip.Name = "btnFlip";
             btnFlip.Size = new Size(99, 23);
             btnFlip.TabIndex = 11;
@@ -217,7 +224,7 @@
             // 
             // btnHorizontalFlip
             // 
-            btnHorizontalFlip.Location = new Point(130, 111);
+            btnHorizontalFlip.Location = new Point(111, 51);
             btnHorizontalFlip.Name = "btnHorizontalFlip";
             btnHorizontalFlip.Size = new Size(79, 22);
             btnHorizontalFlip.TabIndex = 12;
@@ -228,7 +235,7 @@
             // 
             // btnVerticleFlip
             // 
-            btnVerticleFlip.Location = new Point(215, 111);
+            btnVerticleFlip.Location = new Point(232, 80);
             btnVerticleFlip.Name = "btnVerticleFlip";
             btnVerticleFlip.Size = new Size(79, 22);
             btnVerticleFlip.TabIndex = 13;
@@ -239,7 +246,7 @@
             // 
             // trbContrast
             // 
-            trbContrast.Location = new Point(447, 79);
+            trbContrast.Location = new Point(78, 84);
             trbContrast.Maximum = 200;
             trbContrast.Name = "trbContrast";
             trbContrast.Size = new Size(154, 45);
@@ -250,7 +257,7 @@
             // 
             // trbBrightness
             // 
-            trbBrightness.Location = new Point(632, 79);
+            trbBrightness.Location = new Point(190, 108);
             trbBrightness.Maximum = 100;
             trbBrightness.Minimum = -100;
             trbBrightness.Name = "trbBrightness";
@@ -261,7 +268,7 @@
             // 
             // btnBrightnessContrast
             // 
-            btnBrightnessContrast.Location = new Point(550, 49);
+            btnBrightnessContrast.Location = new Point(190, 50);
             btnBrightnessContrast.Name = "btnBrightnessContrast";
             btnBrightnessContrast.Size = new Size(156, 24);
             btnBrightnessContrast.TabIndex = 16;
@@ -272,7 +279,7 @@
             // lblContrast
             // 
             lblContrast.AutoSize = true;
-            lblContrast.Location = new Point(472, 127);
+            lblContrast.Location = new Point(132, 114);
             lblContrast.Name = "lblContrast";
             lblContrast.Size = new Size(52, 15);
             lblContrast.TabIndex = 17;
@@ -282,7 +289,7 @@
             // lblBrightness
             // 
             lblBrightness.AutoSize = true;
-            lblBrightness.Location = new Point(695, 127);
+            lblBrightness.Location = new Point(268, 156);
             lblBrightness.Name = "lblBrightness";
             lblBrightness.Size = new Size(62, 15);
             lblBrightness.TabIndex = 18;
@@ -291,7 +298,7 @@
             // 
             // btnDefaultBNC
             // 
-            btnDefaultBNC.Location = new Point(591, 123);
+            btnDefaultBNC.Location = new Point(178, 152);
             btnDefaultBNC.Name = "btnDefaultBNC";
             btnDefaultBNC.Size = new Size(54, 23);
             btnDefaultBNC.TabIndex = 19;
@@ -302,7 +309,7 @@
             // 
             // btnReisize
             // 
-            btnReisize.Location = new Point(472, 196);
+            btnReisize.Location = new Point(232, 269);
             btnReisize.Name = "btnReisize";
             btnReisize.Size = new Size(77, 31);
             btnReisize.TabIndex = 20;
@@ -312,7 +319,7 @@
             // 
             // btnBlur
             // 
-            btnBlur.Location = new Point(555, 196);
+            btnBlur.Location = new Point(234, 315);
             btnBlur.Name = "btnBlur";
             btnBlur.Size = new Size(77, 31);
             btnBlur.TabIndex = 21;
@@ -322,7 +329,7 @@
             // 
             // txtbBlur
             // 
-            txtbBlur.Location = new Point(557, 234);
+            txtbBlur.Location = new Point(237, 352);
             txtbBlur.Name = "txtbBlur";
             txtbBlur.Size = new Size(74, 23);
             txtbBlur.TabIndex = 22;
@@ -333,7 +340,7 @@
             // 
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "AquaBlue", "Coral", "DarkViolet", "Default" });
-            comboBox1.Location = new Point(659, 196);
+            comboBox1.Location = new Point(232, 225);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(129, 23);
             comboBox1.TabIndex = 23;
@@ -342,6 +349,7 @@
             // Main
             // 
             AutoScaleMode = AutoScaleMode.None;
+            BackColor = Color.FromArgb(52, 52, 52);
             ClientSize = new Size(800, 450);
             Controls.Add(comboBox1);
             Controls.Add(txtbBlur);
@@ -365,9 +373,12 @@
             Controls.Add(Header);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
+            MinimumSize = new Size(800, 450);
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            WindowState = FormWindowState.Maximized;
+            Load += Main_Load;
             Header.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)inputImage).EndInit();

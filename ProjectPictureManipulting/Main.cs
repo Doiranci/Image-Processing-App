@@ -13,6 +13,7 @@ namespace ProjectPictureManipulting
 
     public partial class Main : Form
     {
+
         private Rectangle selectionRectangle;
         public void LoadImageOnMainForm(Image image)
         {
@@ -101,10 +102,10 @@ namespace ProjectPictureManipulting
             ColorMatrix colorMatrix = new ColorMatrix(
                [
          [.3f, .3f, .3f, 0, 0],
-         [.59f, .59f, .59f, 0, 0],
-         [.11f, .11f, .11f, 0, 0],
-         [0, 0, 0, 1, 0],
-         [0, 0, 0, 0, 1]
+                   [.59f, .59f, .59f, 0, 0],
+                   [.11f, .11f, .11f, 0, 0],
+                   [0, 0, 0, 1, 0],
+                   [0, 0, 0, 0, 1]
                ]);
 
             //create some image attributes
@@ -137,6 +138,7 @@ namespace ProjectPictureManipulting
         private void btnMinimize_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
+            
         }
 
         private void btnMaximize_Click(object sender, EventArgs e)
@@ -169,14 +171,14 @@ namespace ProjectPictureManipulting
 
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
-            
+
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = "Image Files(*.jpg; *.jpeg;  *.gif; *.bmp;)|*.jpg; *.jpeg;  *.gif; *.bmp;";
             if (open.ShowDialog() == DialogResult.OK)
             {
                 MemoryStream ms = new MemoryStream(File.ReadAllBytes(open.FileName));
                 inputImage.Image = new Bitmap(ms);
-                
+
                 originalImage = new Bitmap(ms);
             }
             MessageBox.Show($"Height: {inputImage.Image.Height}, Width: {inputImage.Image.Width}, Aspect ratio of Image: {(double)inputImage.Image.Width / (double)inputImage.Image.Height}");
@@ -585,6 +587,11 @@ namespace ProjectPictureManipulting
             }
 
 
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+        
         }
     }
 
