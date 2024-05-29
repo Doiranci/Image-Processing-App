@@ -177,12 +177,60 @@ namespace ProjectPictureManipulting
             if (open.ShowDialog() == DialogResult.OK)
             {
                 MemoryStream ms = new MemoryStream(File.ReadAllBytes(open.FileName));
-                inputImage.Image = new Bitmap(ms);
-
                 originalImage = new Bitmap(ms);
+                double aspectRatio = 0;
+                if (originalImage.Width > originalImage.Height)
+                {
+                    aspectRatio = (double)originalImage.Height / originalImage.Width;
+                    if (aspectRatio * 1600 > 1280)
+                    {
+                        inputImage.Height = 1280;
+                    }
+                    else
+                    {
+                        inputImage.Height = (int)(aspectRatio * 1600);
+                    }
+                    aspectRatio = (double)originalImage.Width / originalImage.Height;
+                    if (aspectRatio * 1600 > 1440)
+                    {
+                        inputImage.Width = 1440;
+                    }
+                    else
+                    {
+                        inputImage.Width = (int)(aspectRatio * 1600);
+                    }
+                   
+                }
+                else if (originalImage.Width < originalImage.Height)
+                {
+                    aspectRatio = (double)originalImage.Width / originalImage.Height;
+                    if (aspectRatio * 1600 > 1280)
+                    {
+                        inputImage.Width = 1280;
+                    }
+                    else
+                    {
+                        inputImage.Width = (int)(aspectRatio * 1600);
+                    }
+                    aspectRatio = (double)originalImage.Height / originalImage.Width;
+                    if (aspectRatio * 1600 > 1440)
+                    {
+                        inputImage.Height = 1440;
+                    }
+                    else
+                    {
+                        inputImage.Height = (int)(aspectRatio * 1600);
+                    }
+                }
+                else
+                {
+                    inputImage.Width = 1440;
+                    inputImage.Height = 1440;
+                }
+                inputImage.Image = new Bitmap(ms);
+                MessageBox.Show($"W: {inputImage.Width}, H: {inputImage.Height}");
             }
             MessageBox.Show($"Height: {inputImage.Image.Height}, Width: {inputImage.Image.Width}, Aspect ratio of Image: {(double)inputImage.Image.Width / (double)inputImage.Image.Height}");
-
         }
 
         private void btnSaveImage_Click(object sender, EventArgs e)

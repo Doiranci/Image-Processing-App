@@ -163,7 +163,7 @@
             inputImage.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             inputImage.Location = new Point(3, 5);
             inputImage.Name = "inputImage";
-            inputImage.Size = new Size(390, 273);
+            inputImage.Size = new Size(446, 317);
             inputImage.SizeMode = PictureBoxSizeMode.StretchImage;
             inputImage.TabIndex = 5;
             inputImage.TabStop = false;
