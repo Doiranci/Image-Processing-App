@@ -199,7 +199,7 @@ namespace ProjectPictureManipulting
                     {
                         inputImage.Width = (int)(aspectRatio * 1600);
                     }
-                   
+
                 }
                 else if (originalImage.Width < originalImage.Height)
                 {
@@ -409,7 +409,7 @@ namespace ProjectPictureManipulting
 
         private void btnReisize_Click(object sender, EventArgs e)
         {
-           
+
             if (inputImage.Image is null)
             {
                 EmptyPictureBoxException();
@@ -429,6 +429,7 @@ namespace ProjectPictureManipulting
 
         private void btnBlur_Click(object sender, EventArgs e)
         {
+
             if (inputImage.Image is null)
             {
                 EmptyPictureBoxException();
@@ -439,16 +440,19 @@ namespace ProjectPictureManipulting
                 {
                     MessageBox.Show("Please select a region to blur.", "Not valid operation", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
+
                 }
+
                 if (int.TryParse(txtbBlur.Text, out int blurScale))
                 {
+
                     if (blurScale < 0)
                     {
                         blurScale = 0;
                     }
                     else if (blurScale > 20)
                     {
-                       blurScale = 20;
+                        blurScale = 20;
                     }
                     txtbBlur.Text = blurScale.ToString();
                     for (int i = 0; i < blurScale; i++)
@@ -465,13 +469,13 @@ namespace ProjectPictureManipulting
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-           
+
             if (inputImage.Image is null)
             {
                 EmptyPictureBoxException();
             }
             else
-            {  
+            {
                 // Get the scale factors for converting PictureBox coordinates to image coordinates
                 float scaleX = (float)inputImage.Image.Width / inputImage.Width;
                 float scaleY = (float)inputImage.Image.Height / inputImage.Height;
@@ -484,7 +488,7 @@ namespace ProjectPictureManipulting
                 selectionRectangle = new Rectangle(startX, startY, 0, 0);
                 inputImage.Refresh();
             }
-          
+
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -524,6 +528,7 @@ namespace ProjectPictureManipulting
             selectionRectangle.Width = endX - selectionRectangle.X;
             selectionRectangle.Height = endY - selectionRectangle.Y;
             inputImage.Refresh();
+            txtbBlur.Visible = !txtbBlur.Visible;
         }
 
 
@@ -614,7 +619,7 @@ namespace ProjectPictureManipulting
         bool isFiltered = false;
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
             if (inputImage.Image is null)
             {
                 EmptyPictureBoxException();
@@ -690,6 +695,133 @@ namespace ProjectPictureManipulting
         private void txtbBlur_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void filterBtn_Click(object sender, EventArgs e)
+        {
+            if (inputImage.Image is null)
+            {
+                EmptyPictureBoxException();
+            }
+            else
+            {
+                comboBox1.Visible = !comboBox1.Visible;
+
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (inputImage.Image is null)
+            {
+                EmptyPictureBoxException();
+
+            }
+            else
+            {
+            inputImage.Image = originalImage;
+
+            }
+        }
+
+        private void btnUploadImage_MouseHover(object sender, EventArgs e)
+        {
+            label3.Visible = true;
+        }
+
+        private void btnUploadImage_MouseLeave(object sender, EventArgs e)
+        {
+            label3.Visible = false;
+        }
+
+        private void btnSaveImage_MouseHover(object sender, EventArgs e)
+        {
+            label4.Visible = true;
+        }
+
+        private void btnSaveImage_MouseLeave(object sender, EventArgs e)
+        {
+            label4.Visible = false;
+        }
+        private void button1_MouseHover_1(object sender, EventArgs e)
+        {
+            label11.Visible = true;
+        }
+
+        private void button1_MouseLeave_1(object sender, EventArgs e)
+        {
+            label11.Visible = false;
+        }
+
+        private void btnFlip_MouseHover(object sender, EventArgs e)
+        {
+            label2.Visible = true;
+        }
+        private void btnFlip_MouseLeave(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+        }
+
+        private void btnRotate_MouseHover(object sender, EventArgs e)
+        {
+            label5.Visible = true;
+        }
+
+
+        private void btnRotate_MouseLeave(object sender, EventArgs e)
+        {
+            label5.Visible = false;
+        }
+
+        private void btnBrightnessContrast_MouseHover(object sender, EventArgs e)
+        {
+            label6.Visible = true;
+        }
+
+        private void btnBrightnessContrast_MouseLeave(object sender, EventArgs e)
+        {
+            label6.Visible = false;
+        }
+
+        private void btnReisize_MouseHover(object sender, EventArgs e)
+        {
+            label7.Visible = true;
+        }
+
+        private void btnReisize_MouseLeave(object sender, EventArgs e)
+        {
+            label7.Visible = false;
+        }
+
+        private void btnGreyScale_MouseHover(object sender, EventArgs e)
+        {
+            label8.Visible = true;
+        }
+
+        private void btnGreyScale_MouseLeave(object sender, EventArgs e)
+        {
+            label8.Visible = false;
+        }
+
+        private void btnBlur_MouseHover(object sender, EventArgs e)
+        {
+            label9.Visible = true;
+        }
+
+        private void btnBlur_MouseLeave(object sender, EventArgs e)
+        {
+            label9.Visible = false;
+        }
+
+        private void btnFilter_MouseHover(object sender, EventArgs e)
+        {
+            label10.Visible = true;
+        }
+
+        private void btnFilter_MouseLeave(object sender, EventArgs e)
+        {
+            label10.Visible = false;
         }
     }
 

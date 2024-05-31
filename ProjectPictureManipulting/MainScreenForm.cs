@@ -35,19 +35,22 @@ namespace ProjectPictureManipulting
 
         private void MainScreenForm_Load(object sender, EventArgs e)
         {
-
+            pictureBox3.AllowDrop = true;
         }
-        private void btnClose_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // Switching to Main Form app
         {
-            Application.Exit();
+            Main main = new Main();
+            main.Show();
+            this.Close();
+
         }
 
-        private void btnMinimize_Click(object sender, EventArgs e)
+        private void btnMinimize_Click_1(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
         }
 
-        private void btnMaximize_Click(object sender, EventArgs e)
+        private void btnMaximize_Click_1(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Normal)
             {
@@ -59,6 +62,43 @@ namespace ProjectPictureManipulting
                 WindowState = FormWindowState.Normal;
             }
         }
-        
+
+        private void btnClose_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pictureBox3_DragDrop(object sender, DragEventArgs e)
+        {
+           
+            bool isImageLoaded = false;
+            var data = e.Data.GetData(DataFormats.FileDrop);
+            if (data != null)
+            {
+                var fileNames = data as string[];
+                if (fileNames.Length > 0)
+                {
+                    pictureBox3.Image = Image.FromFile(fileNames[0]);
+                    isImageLoaded = true;
+
+                }
+
+            }
+            if (isImageLoaded == true)
+            {
+                
+                Image image = pictureBox3.Image;
+                Bitmap pic = new(image);
+                Main openMain = new Main();
+                openMain.LoadImageOnMainForm(pic);
+                openMain.Show();
+                this.Close();
+            }
+        }
+
+        private void pictureBox3_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
     }
 }

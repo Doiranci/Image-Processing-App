@@ -11,8 +11,10 @@ namespace ProjectPictureManipulting
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
 
-                ApplicationConfiguration.Initialize();
-                Application.Run(new Main());
+            ApplicationConfiguration.Initialize();
+            MainScreenForm mS = new MainScreenForm();
+            mS.Show();
+            Application.Run();
 
             try
             {

@@ -49,13 +49,13 @@ namespace ProjectPictureManipulting
         }
 
         private void ResizeImage_Load(object sender, EventArgs e)
-        {          
-                target_image = pictureBoxResize.Image;
-                defaultImage = pictureBoxResize.Image;
-                width = target_image.Width;
-                height = target_image.Height;
-                txtbWidth.Text = width.ToString();
-                txtbHeight.Text = height.ToString();       
+        {
+            target_image = pictureBoxResize.Image;
+            defaultImage = pictureBoxResize.Image;
+            width = target_image.Width;
+            height = target_image.Height;
+            txtbWidth.Text = width.ToString();
+            txtbHeight.Text = height.ToString();
         }
         private void formCloseMethod(string name)
         {
@@ -264,23 +264,23 @@ namespace ProjectPictureManipulting
 
         }
 
-        
+
 
         private void btnMinimize_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
-            
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-            
+            formCloseMethod("ResizeImage");
+
         }
 
         private void btnMaximize_Click(object sender, EventArgs e)
         {
-            
+
             if (WindowState == FormWindowState.Normal)
             {
                 WindowState = FormWindowState.Maximized;
@@ -290,6 +290,36 @@ namespace ProjectPictureManipulting
 
                 WindowState = FormWindowState.Normal;
             }
+        }
+
+        private void btnDefaultResize_MouseHover(object sender, EventArgs e)
+        {
+            label16.Visible = true;
+        }
+
+        private void btnDefaultResize_MouseLeave(object sender, EventArgs e)
+        {
+            label16.Visible = false;
+        }
+
+        private void btnPreviewImage_MouseHover(object sender, EventArgs e)
+        {
+            label17.Visible = true;
+        }
+
+        private void btnPreviewImage_MouseLeave(object sender, EventArgs e)
+        {
+            label17.Visible = false;
+        }
+
+        private void btnSaveResize_MouseHover(object sender, EventArgs e)
+        {
+            label18.Visible = true;
+        }
+
+        private void btnSaveResize_MouseLeave(object sender, EventArgs e)
+        {
+            label18.Visible = false;
         }
     }
 }
