@@ -342,7 +342,7 @@
             // lblContrast
             // 
             lblContrast.AutoSize = true;
-            lblContrast.Location = new Point(257, 367);
+            lblContrast.Location = new Point(256, 416);
             lblContrast.Name = "lblContrast";
             lblContrast.Size = new Size(52, 15);
             lblContrast.TabIndex = 17;
