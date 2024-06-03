@@ -68,6 +68,8 @@
             label10 = new Label();
             button1 = new Button();
             label11 = new Label();
+            pictureBox2 = new PictureBox();
+            pictureBox3 = new PictureBox();
             Header.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)inputImage).BeginInit();
@@ -75,6 +77,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trbContrast).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trbBrightness).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // Header
@@ -570,11 +574,37 @@
             label11.Text = "(Default) - sets image to default";
             label11.Visible = false;
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(1223, 37);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(15, 17);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 37;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(1225, 604);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(12, 11);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 38;
+            pictureBox3.TabStop = false;
+            pictureBox3.Click += pictureBox3_Click;
+            // 
             // Main
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(52, 52, 52);
             ClientSize = new Size(1238, 639);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(label11);
             Controls.Add(button1);
@@ -624,6 +654,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)trbContrast).EndInit();
             ((System.ComponentModel.ISupportInitialize)trbBrightness).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -668,5 +700,7 @@
         private Button button1;
         private Label label11;
         private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
     }
 }

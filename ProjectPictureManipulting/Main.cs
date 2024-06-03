@@ -224,10 +224,10 @@ namespace ProjectPictureManipulting
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
         }
-        
+
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
-         
+
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = "Image Files(*.jpg; *.jpeg;  *.gif; *.bmp;)|*.jpg; *.jpeg;  *.gif; *.bmp;";
             if (open.ShowDialog() == DialogResult.OK)
@@ -895,6 +895,17 @@ namespace ProjectPictureManipulting
         private void label7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+            LoadImageOnMainForm(Image.FromFile(@"C:\\Users\\Martin Mitkov\\Documents\\GitHub\\Image-Processing-App\\ProjectPictureManipulting\\UsedImages\\Used icons\\snimchica.png"));
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            LoadImageOnMainForm(Image.FromFile(@"C:\Users\Martin Mitkov\Documents\GitHub\Image-Processing-App\ProjectPictureManipulting\UsedImages\Used icons\vetkata.png"));
         }
     }
 
