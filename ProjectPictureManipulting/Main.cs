@@ -18,7 +18,62 @@ namespace ProjectPictureManipulting
         private Rectangle selectionRectangle;
         public void LoadImageOnMainForm(Image image)
         {
+            int width = 0;
+            int height = 0;
+            originalImage = new Bitmap(image);
+            target_image = new Bitmap(image);
+            double aspectRatio = 0;
+            if (originalImage.Width > originalImage.Height)
+            {
+                aspectRatio = (double)originalImage.Height / originalImage.Width;
+                if (aspectRatio * 1600 > 1280)
+                {
+                    height = 1280;
+                }
+                else
+                {
+                    height = (int)(aspectRatio * 1600);
+                }
+                aspectRatio = (double)originalImage.Width / originalImage.Height;
+                if (aspectRatio * 1600 > 1440)
+                {
+                    width = 1440;
+                }
+                else
+                {
+                    width = (int)(aspectRatio * 1600);
+                }
+
+            }
+            else if (originalImage.Width < originalImage.Height)
+            {
+                aspectRatio = (double)originalImage.Width / originalImage.Height;
+                if (aspectRatio * 1600 > 1280)
+                {
+                    width = 1280;
+                }
+                else
+                {
+                    width = (int)(aspectRatio * 1600);
+                }
+                aspectRatio = (double)originalImage.Height / originalImage.Width;
+                if (aspectRatio * 1600 > 1440)
+                {
+                    height = 1440;
+                }
+                else
+                {
+                    height = (int)(aspectRatio * 1600);
+                }
+            }
+            else
+            {
+                width = 1440;
+                height = 1440;
+            }
+            inputImage.Image = ResizeNow(width, height);
             inputImage.Image = image;
+            originalImage = (Bitmap)inputImage.Image;
         }
         public Bitmap AdjustBrightnessContrast(Image image, int contrastValue, int brightnessValue)
         {
@@ -169,71 +224,18 @@ namespace ProjectPictureManipulting
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
         }
-
+        
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
-            int width = 0;
-            int height = 0;
+         
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = "Image Files(*.jpg; *.jpeg;  *.gif; *.bmp;)|*.jpg; *.jpeg;  *.gif; *.bmp;";
             if (open.ShowDialog() == DialogResult.OK)
             {
                 MemoryStream ms = new MemoryStream(File.ReadAllBytes(open.FileName));
                 originalImage = new Bitmap(ms);
-                target_image = new Bitmap(ms);
-                double aspectRatio = 0;
-                if (originalImage.Width > originalImage.Height)
-                {
-                    aspectRatio = (double)originalImage.Height / originalImage.Width;
-                    if (aspectRatio * 1600 > 1280)
-                    {
-                        height = 1280;
-                    }
-                    else
-                    {
-                        height = (int)(aspectRatio * 1600);
-                    }
-                    aspectRatio = (double)originalImage.Width / originalImage.Height;
-                    if (aspectRatio * 1600 > 1440)
-                    {
-                        width = 1440;
-                    }
-                    else
-                    {
-                        width = (int)(aspectRatio * 1600);
-                    }
-
-                }
-                else if (originalImage.Width < originalImage.Height)
-                {
-                    aspectRatio = (double)originalImage.Width / originalImage.Height;
-                    if (aspectRatio * 1600 > 1280)
-                    {
-                        width = 1280;
-                    }
-                    else
-                    {
-                        width = (int)(aspectRatio * 1600);
-                    }
-                    aspectRatio = (double)originalImage.Height / originalImage.Width;
-                    if (aspectRatio * 1600 > 1440)
-                    {
-                        height = 1440;
-                    }
-                    else
-                    {
-                        height = (int)(aspectRatio * 1600);
-                    }
-                }
-                else
-                {
-                    width = 1440;
-                    height = 1440;
-                }
-                inputImage.Image = ResizeNow(width, height);
-                //MessageBox.Show($"W: {inputImage.Width}, H: {inputImage.Height}");
+                LoadImageOnMainForm(originalImage);
             }
-            //MessageBox.Show($"Height: {inputImage.Image.Height}, Width: {inputImage.Image.Width}, Aspect ratio of Image: {(double)inputImage.Image.Width / (double)inputImage.Image.Height}");
         }
         Image target_image;
         public Bitmap ResizeNow(int target_width, int target_height)
@@ -456,6 +458,7 @@ namespace ProjectPictureManipulting
                 ResizeImage resize = new ResizeImage();
                 resize.LoadImageOnResizeForm(inputImage.Image);
                 resize.Show();
+                ResizeImage.formCloseMethod("Main");
             }
         }
 
@@ -887,6 +890,11 @@ namespace ProjectPictureManipulting
         private void inputImage_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

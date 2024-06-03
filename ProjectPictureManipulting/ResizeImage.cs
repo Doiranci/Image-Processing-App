@@ -57,7 +57,7 @@ namespace ProjectPictureManipulting
             txtbWidth.Text = width.ToString();
             txtbHeight.Text = height.ToString();
         }
-        private void formCloseMethod(string name)
+        public static void formCloseMethod(string name)
         {
             Application.OpenForms
            .OfType<Form>()
@@ -72,7 +72,7 @@ namespace ProjectPictureManipulting
             Main mainWindow = new();
             mainWindow.LoadImageOnMainForm(pictureBoxResize.Image);
             mainWindow.Show();
-            this.Close();
+            Close();
             //formCloseMethod("ResizeImage");
         }
         private void btnDefaultResize_Click(object sender, EventArgs e)

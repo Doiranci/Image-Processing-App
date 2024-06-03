@@ -506,6 +506,7 @@
             label7.TabIndex = 30;
             label7.Text = "(Resize) image to different sizes";
             label7.Visible = false;
+            label7.Click += label7_Click;
             // 
             // label8
             // 
