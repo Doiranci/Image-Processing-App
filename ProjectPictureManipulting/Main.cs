@@ -171,33 +171,35 @@ namespace ProjectPictureManipulting
 
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
-
+            int width = 0;
+            int height = 0;
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = "Image Files(*.jpg; *.jpeg;  *.gif; *.bmp;)|*.jpg; *.jpeg;  *.gif; *.bmp;";
             if (open.ShowDialog() == DialogResult.OK)
             {
                 MemoryStream ms = new MemoryStream(File.ReadAllBytes(open.FileName));
                 originalImage = new Bitmap(ms);
+                target_image = new Bitmap(ms);
                 double aspectRatio = 0;
                 if (originalImage.Width > originalImage.Height)
                 {
                     aspectRatio = (double)originalImage.Height / originalImage.Width;
                     if (aspectRatio * 1600 > 1280)
                     {
-                        inputImage.Height = 1280;
+                        height = 1280;
                     }
                     else
                     {
-                        inputImage.Height = (int)(aspectRatio * 1600);
+                        height = (int)(aspectRatio * 1600);
                     }
                     aspectRatio = (double)originalImage.Width / originalImage.Height;
                     if (aspectRatio * 1600 > 1440)
                     {
-                        inputImage.Width = 1440;
+                        width = 1440;
                     }
                     else
                     {
-                        inputImage.Width = (int)(aspectRatio * 1600);
+                        width = (int)(aspectRatio * 1600);
                     }
 
                 }
@@ -206,32 +208,65 @@ namespace ProjectPictureManipulting
                     aspectRatio = (double)originalImage.Width / originalImage.Height;
                     if (aspectRatio * 1600 > 1280)
                     {
-                        inputImage.Width = 1280;
+                        width = 1280;
                     }
                     else
                     {
-                        inputImage.Width = (int)(aspectRatio * 1600);
+                        width = (int)(aspectRatio * 1600);
                     }
                     aspectRatio = (double)originalImage.Height / originalImage.Width;
                     if (aspectRatio * 1600 > 1440)
                     {
-                        inputImage.Height = 1440;
+                        height = 1440;
                     }
                     else
                     {
-                        inputImage.Height = (int)(aspectRatio * 1600);
+                        height = (int)(aspectRatio * 1600);
                     }
                 }
                 else
                 {
-                    inputImage.Width = 1440;
-                    inputImage.Height = 1440;
+                    width = 1440;
+                    height = 1440;
                 }
-                inputImage.Image = new Bitmap(ms);
+                inputImage.Image = ResizeNow(width,height);
                 MessageBox.Show($"W: {inputImage.Width}, H: {inputImage.Height}");
             }
             MessageBox.Show($"Height: {inputImage.Image.Height}, Width: {inputImage.Image.Width}, Aspect ratio of Image: {(double)inputImage.Image.Width / (double)inputImage.Image.Height}");
         }
+        Image target_image;
+        public Bitmap ResizeNow(int target_width, int target_height)
+        {
+            if (target_width < 1)
+            {
+                target_width = 1;
+            }
+            if (target_height < 1)
+            {
+                target_height = 1;
+            }
+            Rectangle dest_rect = new Rectangle(0, 0, target_width, target_height);
+            Bitmap destImage = new Bitmap(target_width, target_height);
+            destImage.SetResolution(target_image.HorizontalResolution, target_image.VerticalResolution);
+            using (var g = Graphics.FromImage(destImage))
+            {
+                g.CompositingMode = CompositingMode.SourceCopy;
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                using (var wrapmode = new ImageAttributes())
+                {
+                    wrapmode.SetWrapMode(WrapMode.TileFlipXY);
+                    g.DrawImage(target_image, dest_rect, 0, 0, target_image.Width, target_image.Height, GraphicsUnit.Pixel, wrapmode);
+                }
+            }
+            return destImage;
+        }
+
+
+
+
 
         private void btnSaveImage_Click(object sender, EventArgs e)
         {
@@ -242,6 +277,7 @@ namespace ProjectPictureManipulting
             }
             else
             {
+                inputImage.Image = ResizeNow(originalImage.Width, originalImage.Height);
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "JPeg Image|*.jpg|PNG Image|*.png";
                 ImageFormat format = ImageFormat.Png;
@@ -259,7 +295,7 @@ namespace ProjectPictureManipulting
                     }
                     inputImage.Image.Save(sfd.FileName, format);
                 }
-                label1.Text = "Image saved successfully!!!!";
+                
             }
 
 
