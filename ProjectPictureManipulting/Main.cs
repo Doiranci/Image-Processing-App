@@ -14,6 +14,7 @@ namespace ProjectPictureManipulting
     public partial class Main : Form
     {
 
+
         private Rectangle selectionRectangle;
         public void LoadImageOnMainForm(Image image)
         {
@@ -229,10 +230,10 @@ namespace ProjectPictureManipulting
                     width = 1440;
                     height = 1440;
                 }
-                inputImage.Image = ResizeNow(width,height);
-                MessageBox.Show($"W: {inputImage.Width}, H: {inputImage.Height}");
+                inputImage.Image = ResizeNow(width, height);
+                //MessageBox.Show($"W: {inputImage.Width}, H: {inputImage.Height}");
             }
-            MessageBox.Show($"Height: {inputImage.Image.Height}, Width: {inputImage.Image.Width}, Aspect ratio of Image: {(double)inputImage.Image.Width / (double)inputImage.Image.Height}");
+            //MessageBox.Show($"Height: {inputImage.Image.Height}, Width: {inputImage.Image.Width}, Aspect ratio of Image: {(double)inputImage.Image.Width / (double)inputImage.Image.Height}");
         }
         Image target_image;
         public Bitmap ResizeNow(int target_width, int target_height)
@@ -295,7 +296,7 @@ namespace ProjectPictureManipulting
                     }
                     inputImage.Image.Save(sfd.FileName, format);
                 }
-                
+
             }
 
 
@@ -557,8 +558,8 @@ namespace ProjectPictureManipulting
             int endX = (int)(e.X * scaleX);
             int endY = (int)(e.Y * scaleY);
 
-            MessageBox.Show($"Mouse Up - PictureBox: X: {e.X}, Y: {e.Y}, Image: X: {endX}, Y: {endY}");
-            MessageBox.Show($"Mouse Up scaleX: {scaleX}, scaleY: {scaleY}");
+            //MessageBox.Show($"Mouse Up - PictureBox: X: {e.X}, Y: {e.Y}, Image: X: {endX}, Y: {endY}");
+            //MessageBox.Show($"Mouse Up scaleX: {scaleX}, scaleY: {scaleY}");
 
 
             selectionRectangle.Width = endX - selectionRectangle.X;
@@ -756,7 +757,7 @@ namespace ProjectPictureManipulting
             }
             else
             {
-            inputImage.Image = originalImage;
+                inputImage.Image = originalImage;
 
             }
         }
@@ -858,6 +859,34 @@ namespace ProjectPictureManipulting
         private void btnFilter_MouseLeave(object sender, EventArgs e)
         {
             label10.Visible = false;
+        }
+
+        private void inputImage_DragDrop(object sender, DragEventArgs e)
+        {
+            bool isImageLoaded = false;
+            var data = e.Data.GetData(DataFormats.FileDrop);
+            if (data != null)
+            {
+                var fileNames = data as string[];
+                if (fileNames.Length > 0)
+                {
+                    inputImage.Image = Image.FromFile(fileNames[0]);
+                    isImageLoaded = true;
+
+                }
+
+            }
+            if (isImageLoaded == true)
+            {
+
+                Image image = inputImage.Image;
+                Bitmap pic = new(image);
+            }
+        }
+
+        private void inputImage_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
         }
     }
 

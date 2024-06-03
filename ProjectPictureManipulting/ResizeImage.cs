@@ -67,11 +67,13 @@ namespace ProjectPictureManipulting
         }
         private void btnSaveResize_Click(object sender, EventArgs e)
         {
+            
             ////////////////////////
             Main mainWindow = new();
             mainWindow.LoadImageOnMainForm(pictureBoxResize.Image);
             mainWindow.Show();
-            formCloseMethod("ResizeImage");
+            this.Close();
+            //formCloseMethod("ResizeImage");
         }
         private void btnDefaultResize_Click(object sender, EventArgs e)
         {

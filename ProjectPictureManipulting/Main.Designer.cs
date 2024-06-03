@@ -182,13 +182,16 @@
             // 
             // inputImage
             // 
+            inputImage.AllowDrop = true;
             inputImage.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             inputImage.Location = new Point(0, -3);
             inputImage.Name = "inputImage";
-            inputImage.Size = new Size(887, 514);
+            inputImage.Size = new Size(891, 517);
             inputImage.SizeMode = PictureBoxSizeMode.StretchImage;
             inputImage.TabIndex = 5;
             inputImage.TabStop = false;
+            inputImage.DragDrop += inputImage_DragDrop;
+            inputImage.DragEnter += inputImage_DragEnter;
             inputImage.Paint += pictureBox1_Paint;
             inputImage.MouseDown += pictureBox1_MouseDown;
             inputImage.MouseMove += pictureBox1_MouseMove;
