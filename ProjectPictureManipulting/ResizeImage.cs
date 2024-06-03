@@ -278,6 +278,9 @@ namespace ProjectPictureManipulting
         private void btnClose_Click(object sender, EventArgs e)
         {
             formCloseMethod("ResizeImage");
+            Main mainWindow = new();
+            mainWindow.LoadImageOnMainForm(pictureBoxResize.Image);
+            mainWindow.Show();
 
         }
 
