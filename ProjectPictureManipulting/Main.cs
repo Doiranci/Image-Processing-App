@@ -900,12 +900,12 @@ namespace ProjectPictureManipulting
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
-            LoadImageOnMainForm(Image.FromFile(@"C:\\Users\\Martin Mitkov\\Documents\\GitHub\\Image-Processing-App\\ProjectPictureManipulting\\UsedImages\\Used icons\\snimchica.png"));
+            LoadImageOnMainForm(Image.FromFile(@".\UsedImages\Used icons\snimchica.png"));
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            LoadImageOnMainForm(Image.FromFile(@"C:\Users\Martin Mitkov\Documents\GitHub\Image-Processing-App\ProjectPictureManipulting\UsedImages\Used icons\vetkata.png"));
+            LoadImageOnMainForm(Image.FromFile(@".\UsedImages\Used icons\vetkata.png"));
         }
     }
 
